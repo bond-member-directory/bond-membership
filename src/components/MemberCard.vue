@@ -1,6 +1,6 @@
 <template>
     <div class="w5 fl bg-bond-grey br2 mr3 mb3">
-      <header class="w-100 bg-bond-dark-red white pa2 br2">
+      <header class="w-100 bg-bond-dark-red white pa2 br2 br--top">
         {{ member.name }}
       </header>
       <div class="w-100 pa2">

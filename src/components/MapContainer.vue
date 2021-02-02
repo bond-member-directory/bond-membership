@@ -12,15 +12,6 @@
 </template>
 
 <script>
-/*
-  CONTINENT
-  ECONOMY
-  INCOME_GRP
-  REGION_UN
-  REGION_WB
-  TYPE
-  SUBREGION
-*/
 const d3 = { ...require('d3'), ...require('d3-geo') };
 
 import MapCountry from './MapCountry.vue'
@@ -51,12 +42,9 @@ export default {
   mounted () {
     this.projection = d3.geoNaturalEarth1()
       .fitSize([this.width, this.height], this.world);
-
     var geoGenerator = d3.geoPath()
       .projection(this.projection)
-    
     this.paths = this.world.features.map((b) => [b.properties, geoGenerator(b)]);
-    console.log(this.paths);
   },
   components: {
     MapCountry
