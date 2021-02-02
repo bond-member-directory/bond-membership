@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <PageHeader />
+  <div class="w-100">
+    <div class="w-25 fl">
+      <CardContainer :countries="countries" />
+    </div>
+    <div class="w-75 fl">
+      <MapContainer :world="world" />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PageHeader from './components/PageHeader.vue'
+import CardContainer from './components/CardContainer.vue'
+import MapContainer from './components/MapContainer.vue'
+import world from './assets/world.json';
 
 export default {
   name: 'App',
+  data () {
+    return {
+      world: world,
+      countries: Object.fromEntries(
+        world.features.map((c) => [c.properties['ISO_A2'], c.properties['NAME_EN']])
+      ),
+    };
+  },
   components: {
-    HelloWorld
+    PageHeader,
+    CardContainer,
+    MapContainer,
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

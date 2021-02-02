@@ -5,13 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+        .bg-bond-red {
+            background-color: #D50032;
+        }
+        .bg-bond-dark-red {
+            background-color: #8A0026;
+        }
+        .bg-bond-grey {
+            background-color: #D2D0C8;
+        }
+        .fill-bond-red {
+            fill: #D50032;
+        }
+        .fill-bond-dark-red {
+            fill: #8A0026;
+        }
+        .fill-bond-grey {
+            fill: #D2D0C8;
+        }
+        .bond-red {
+            color: #D50032;
+        }
+        .bond-dark-red {
+            color: #8A0026;
+        }
+        .bond-grey {
+            color: #D2D0C8;
+        }
+    </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app" class="pa0 ma0 sans-serif"></div>
     <!-- built files will be auto injected -->
   </body>
 </html>
