@@ -19,6 +19,7 @@ import world from './assets/world.json';
 export default {
   name: 'App',
   data () {
+    world.features = world.features.filter((b) => b.properties['ISO_A2'] != 'AQ');
     return {
       world: world,
       countries: Object.fromEntries(

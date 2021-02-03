@@ -1,14 +1,19 @@
 <template>
   <svg :width="width" :height="width">
-    <map-country 
-      v-for="p in paths"
-      :path="p[1]"
-      :countryProps="p[0]"
-      :key="p"
-      @select-country="selectedCountry = $event"
-      :countrySelected="selectedCountry && selectedCountry[fieldToUse] == p[0][fieldToUse]" />
+    <g class="dark-shadow">
+      <map-country 
+        v-for="p in paths"
+        :path="p[1]"
+        :countryProps="p[0]"
+        :key="p"
+        @hover-country="hoveredCountry = $event"
+        @select-country="zoomMap($event)"
+        :countrySelected="countryIsSelected(p[0])"
+        :countryHovered="countryIsHovered(p[0])" />
+    </g>
   </svg>
-  <p class="pa3 bg-red white" v-if="selectedCountry && selectedCountry[fieldToUse]">{{ selectedCountry[fieldToUse] }}</p>
+  <button @click="zoomMap(null)" v-if="zoomLevel > 0">Zoom to world</button>
+  <p class="pa3 bg-red white" v-if="selectedCountryName">{{ selectedCountryName }}</p>
 </template>
 
 <script>
@@ -34,17 +39,79 @@ export default {
       width: 600,
       height: 400,
       projection: null,
+      geoGenerator: null,
       paths: [],
       selectedCountry: null,
+      hoveredCountry: null,
       fieldToUse: 'REGION_WB',
+      zoomLevel: 0,
     };
+  },
+  computed: {
+    selectedCountryName: function(){
+      if(!this.selectedCountry){
+        return null;
+      } else if(this.zoomLevel > 1){
+        return this.selectedCountry["NAME_EN"];
+      } else {
+        return this.selectedCountry[this.fieldToUse];
+      }
+    },
+  },
+  methods: {
+    countryIsSelected: function(country){
+      if(!this.selectedCountry){
+        return false;
+      } else if(this.zoomLevel > 1){
+        return this.selectedCountry["NAME_EN"] == country["NAME_EN"];
+      } else {
+        return this.selectedCountry[this.fieldToUse] == country[this.fieldToUse];
+      }
+    },
+    countryIsHovered: function(country){
+      if(!this.hoveredCountry){
+        return false;
+      } else if(this.zoomLevel > 0){
+        return this.hoveredCountry["NAME_EN"] == country["NAME_EN"];
+      } else {
+        return this.hoveredCountry[this.fieldToUse] == country[this.fieldToUse];
+      }
+    },
+    zoomMap: function(country){
+      this.selectedCountry = country;
+      var countries = this.world.features;
+      if(country != null){
+        if(this.zoomLevel>=1){
+          countries = this.world.features.filter(
+            (c) => c.properties['ISO_A2'] == country['ISO_A2']
+          );
+          this.zoomLevel = 2;
+        } else {
+          countries = this.world.features.filter(
+            (c) => (
+              c.properties[this.fieldToUse] == country[this.fieldToUse] &&
+              c.properties['POP_EST'] >= 1000000 &&
+              !["GL", "RU"].includes(c.properties['ISO_A2'])
+            )
+          );
+          this.zoomLevel = 1;
+        }
+      } else {
+        this.zoomLevel = 0;
+      }
+      this.projection.fitSize([this.width, this.height], {
+        type: "FeatureCollection",
+        features: countries,
+      });
+      this.paths = this.world.features.map((b) => [b.properties, this.geoGenerator(b)]);
+    },
   },
   mounted () {
     this.projection = d3.geoNaturalEarth1()
       .fitSize([this.width, this.height], this.world);
-    var geoGenerator = d3.geoPath()
-      .projection(this.projection)
-    this.paths = this.world.features.map((b) => [b.properties, geoGenerator(b)]);
+    this.geoGenerator = d3.geoPath()
+      .projection(this.projection);
+    this.paths = this.world.features.map((b) => [b.properties, this.geoGenerator(b)]);
   },
   components: {
     MapCountry
@@ -56,5 +123,11 @@ export default {
 .map {
   width: 100%;
   height: 100%;
+}
+.light-shadow{
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.4));
+}
+.dark-shadow{
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 1));
 }
 </style>

@@ -1,8 +1,17 @@
 <template>
   <path :d="path"
-    @mouseover="onHover()"
-    @mouseleave="leaveHover()"
-    :class="{ 'fill-bond-dark-red': countrySelected, 'fill-bond-red': !countrySelected }"
+    @mouseover="$emit('hoverCountry', countryProps)"
+    @mouseleave="$emit('hoverCountry', {})"
+    @click="$emit('selectCountry', countryProps)"
+    stroke-width="0.5"
+    :class="{
+      'fill-bond-dark-red': countrySelected && !countryHovered,
+      'fill-bond-red': countryHovered,
+      'fill-bond-grey': !countryHovered && !countrySelected,
+      'stroke-bond-dark-red': countrySelected && !countryHovered,
+      'stroke-bond-red': countryHovered,
+      'stroke-bond-grey': !countryHovered && !countrySelected,
+    }"
     />
 </template>
 
@@ -12,10 +21,8 @@ export default {
   props: {
     path: null,
     countryProps: null,
-    countrySelected: {
-        type: Boolean,
-        default: false
-    },
+    countrySelected: Boolean,
+    countryHovered: Boolean,
   },
   data() {
     return {
@@ -34,7 +41,7 @@ export default {
 </script>
 
 <style scoped>
-    .active {
-        fill: purple;
-    }
+  .active {
+      fill: purple;
+  }
 </style>
