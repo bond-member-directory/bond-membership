@@ -2,7 +2,7 @@
   <path :d="path"
     @mouseover="onHover()"
     @mouseleave="leaveHover()"
-    :class="{ 'fill-bond-red': countrySelected }"
+    :class="{ 'fill-bond-dark-red': countrySelected, 'fill-bond-red': !countrySelected }"
     />
 </template>
 
