@@ -1,18 +1,19 @@
 <template>
-  <div class="w-100 bg-light-gray pv3 ph4 smol-flexbox-grid">
+  <div class="w-100 pv3 ph4 smol-flexbox-grid">
     <div class="">
       <Multiselect
         v-model="filters.country"
         :options="countrySelectValues"
         :searchable="true"
         mode="tags"
+        :maxHeight="240"
         @change="setCountry"
         placeholder="Filter by country"
         class="w-100 bg-bond-grey"
       />
-      <a href="#" class="fr blue link underline f6 mt2" @click.prevent="clearCountry">Clear</a>
+      <a href="#" class="fr blue link underline f5 mt2" @click.prevent="clearCountry">Clear</a>
     </div>
-    <div class="">
+    <div class="dn">
       <Multiselect
         v-model="filters.sdg"
         :options="sdgSelectValues"
@@ -22,7 +23,7 @@
         placeholder="Filter by Sustainable Development Goal"
         class="w-100 bg-bond-grey"
       />
-      <a href="#" class="fr blue link underline f6 mt2" @click.prevent="clearSDG">Clear</a>
+      <a href="#" class="fr blue link underline f5 mt2" @click.prevent="clearSDG">Clear</a>
     </div>
     <div class="">
       <input :value="filters.search"
@@ -33,20 +34,25 @@
       />
     </div>
   </div>
-  <div class="w-100 bg-light-gray pt3 ph4">
-    <template v-for="(sdg, index) in sdgSelectValues" :key="index">
-      <a href="#" @click.prevent="clearSDG" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null" v-if="sdgSelected(sdg.value) && filters.sdg.length > 0">
-        <img :src="sdgIcon(sdg.value)" :title="sdg.label" class="w3 o-100 o-100-hover grow" />
-      </a>
-      <a href="#" @click.prevent="setSDG(sdg.value)" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null" v-else-if="sdgSelected(sdg.value)">
-        <img :src="sdgIcon(sdg.value)" :title="sdg.label" class="w3 o-100 o-100-hover grow" />
-      </a>
-      <a href="#" @click.prevent="setSDG(sdg.value)" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null" v-else>
-        <img :src="sdgIcon(sdg.value)" :title="sdg.label" class="w3 o-30 o-100-hover grow" />
-      </a>
-    </template>
+  <div class="w-100 pt2 pb3 ph4">
+    <div class="mb2 f4">
+      <label for="filterSDG" class="b">Sustainable Development Goals</label><span class="" v-if="hoverSDG">: {{ hoverSDG }}</span>
+      <a href="#" class="fr blue link underline f5 mt2" @click.prevent="clearSDG">Clear</a>
+    </div>
+    <ul class="ma0 pa0 list smol-css-grid sdg-grid" id="filterSDG">
+      <li v-for="(sdg, index) in sdgSelectValues" :key="index" class="di">
+        <a href="#" @click.prevent="clearSDG" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null" v-if="sdgSelected(sdg.value) && filters.sdg.length > 0">
+          <img :src="sdgIcon(sdg.value)" :title="sdg.label" class="o-100 o-100-hover grow" />
+        </a>
+        <a href="#" @click.prevent="setSDG(sdg.value)" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null" v-else-if="sdgSelected(sdg.value)">
+          <img :src="sdgIcon(sdg.value)" :title="sdg.label" class="o-100 o-100-hover grow" />
+        </a>
+        <a href="#" @click.prevent="setSDG(sdg.value)" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null" v-else>
+          <img :src="sdgIcon(sdg.value)" :title="sdg.label" class="o-30 o-100-hover grow" />
+        </a>
+      </li>
+    </ul>
   </div>
-  <div class="w-100 bg-light-gray pb3 ph4 cf"><p class="h2">{{ hoverSDG }}</p></div>
 </template>
 
 <script>
@@ -115,17 +121,13 @@ export default {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style scoped>
-.smol-flexbox-grid {
-  --min: 40ch;
-  --gap: 1rem;
-
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--gap);
+.multiselect-tag {
+    font-size: 2em;
 }
 
-.smol-flexbox-grid > * {
-  flex: 1 1 var(--min);
+.sdg-grid {
+  --min: 10ch;
+  --gap: 0rem;
 }
 
 .o-100-hover:hover {

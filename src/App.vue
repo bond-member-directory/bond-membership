@@ -1,6 +1,5 @@
 <template>
   <PageHeader />
-  <DataFilters />
   <div class="w-100">
     <div class="w-50 fl">
       <CardContainer />
@@ -13,7 +12,6 @@
 
 <script>
 import PageHeader from './components/PageHeader.vue'
-import DataFilters from './components/DataFilters.vue'
 import CardContainer from './components/CardContainer.vue'
 import MapContainer from './components/MapContainer.vue'
 import world from './assets/world.json';
@@ -37,7 +35,6 @@ export default {
     PageHeader,
     CardContainer,
     MapContainer,
-    DataFilters,
   }
 }
 </script>

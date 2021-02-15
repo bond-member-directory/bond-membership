@@ -3,7 +3,7 @@
     <template v-for="i in penultimateItem" :key="i">
         {{ i }}
         <template v-if="oxfordComma && items.length > 2">, </template>
-        {{ separator }}
+        {{ separator }}{{ " " }}
     </template>
     <template v-for="i in lastItem" :key="i">{{ i }}</template>
 </template>
