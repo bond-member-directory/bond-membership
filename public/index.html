@@ -9,14 +9,23 @@
     <style>
         @font-face {
             font-family: DINNextRounded;
+            font-weight: normal;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Light.otf") format("opentype");
+        }
+        @font-face {
+            font-family: DINNextRounded;
+            font-weight: bold;
             src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Regular.otf") format("opentype");
+        }
+        @font-face {
+            font-family: DINNextRounded;
+            font-weight: 800;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Bold.otf") format("opentype");
         }
     </style>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
     <link rel="stylesheet" href="<%= BASE_URL %>styles.css" />
-    <title>
-        <%= htmlWebpackPlugin.options.title %>
-    </title>
+    <title>Bond | The international development network</title>
 </head>
 
 <body>

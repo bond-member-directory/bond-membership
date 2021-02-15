@@ -1,8 +1,8 @@
 <template>
   <header class="w-100 bg-white">
-    <div class="w-100 pv2 ph4 flex items-center f4">
+    <div class="w-100 pb2 pt3 ph4 f4">
         <img alt="Bond logo" src="../assets/logo.png" class="w5">
-        <h1 class="bond-dark-red ml5 header-text">Membership directory</h1>
+        <h1 class="bond-mid-grey ml5 header-text fr normal f1">Membership directory</h1>
     </div>
     <DataFilters />
   </header>
@@ -21,6 +21,7 @@ export default {
 
 <style scoped>
 .header-text {
-  padding-top: 30px;
+  font-weight: 200;
+  /* padding-top: 30px; */
 }
 </style>

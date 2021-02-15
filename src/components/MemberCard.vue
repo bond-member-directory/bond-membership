@@ -1,6 +1,6 @@
 <template>
-    <div class="fl bg-bond-grey br3 bb bw4 border-bond-dark-red">
-      <header class="w-100 bg-bond-dark-red white ph2 pv3 br3 br--top">
+    <div class="fl bg-bond-grey bb bw4 border-bond-dark-red">
+      <header class="w-100 bg-bond-dark-red white ph2 pv3">
         <h3 class="pa0 ma0 f4">{{ member.name }}</h3>
         <template v-if="(order < 4) && member.logoUrl">
           <img :src="member.logoUrl" class="br-100 fr org-logo border-bond-dark-red bw3 ba w3" />
@@ -8,7 +8,7 @@
       </header>
       <div class="w-100 pa2">
         <p v-if="member.website" class="mh0 mv1 pa0">
-          <a :href="cleanWebsite(member.website)">{{ displayWebsite(member.website) }}</a>
+          <a :href="cleanWebsite(member.website)" class="b bond-dark-blue link underline f5">{{ displayWebsite(member.website) }}</a>
         </p>
         <p v-if="member.yearjoined" class="mh0 mv1 pa0">
           Bond Member since {{ member.yearjoined.slice(0, 4) }}
