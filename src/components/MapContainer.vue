@@ -13,16 +13,18 @@
     </g>
   </svg>
   <button @click="zoomMap(null)" v-if="zoomLevel > 0">Zoom to world</button>
-  <p class="pa3 bg-red white" v-if="selectedCountryName">{{ selectedCountryName }}</p>
+  <p class="pa3 bg-bond-red white" v-if="selectedCountryName">{{ selectedCountryName }}</p>
 </template>
 
 <script>
 const d3 = { ...require('d3'), ...require('d3-geo') };
 
+import filterStore from '../FilterStore.js';
 import MapCountry from './MapCountry.vue'
 
 export default {
   name: 'MapContainer',
+  inject: ['world'],
   props: {
     center: {
       type: Array,
@@ -32,7 +34,6 @@ export default {
       type: [Number, String],
       default: 1 << 20,
     },
-    world: {},
   },
   data () {
     return {
@@ -45,6 +46,7 @@ export default {
       hoveredCountry: null,
       fieldToUse: 'REGION_WB',
       zoomLevel: 0,
+      filters: filterStore.state,
     };
   },
   computed: {
@@ -86,6 +88,7 @@ export default {
             (c) => c.properties['ISO_A2'] == country['ISO_A2']
           );
           this.zoomLevel = 2;
+          filterStore.setCountry(country['ISO_A2']);
         } else {
           countries = this.world.features.filter(
             (c) => (
@@ -106,7 +109,7 @@ export default {
       this.paths = this.world.features.map((b) => [b.properties, this.geoGenerator(b)]);
     },
   },
-  mounted () {
+  mounted() {
     this.projection = d3.geoNaturalEarth1()
       .fitSize([this.width, this.height], this.world);
     this.geoGenerator = d3.geoPath()
