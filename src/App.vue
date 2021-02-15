@@ -1,10 +1,13 @@
 <template>
   <PageHeader />
+  <div class="w-100 ph4">
+    <a href="#" @click.prevent="showMap = !showMap" class="fr"><template v-if="showMap">Hide map</template><template v-else>Show map</template></a>
+  </div>
   <div class="w-100">
-    <div class="w-50 fl">
+    <div class="fl" :class="{ 'w-50': showMap }">
       <CardContainer />
     </div>
-    <div class="w-50 fl">
+    <div class="fl w-50" v-if="showMap">
       <MapContainer />
     </div>
   </div>
@@ -19,6 +22,11 @@ import members from './assets/bond_members.json'
 
 export default {
   name: 'App',
+  data: function(){
+    return {
+      showMap: false,
+    }
+  },
   provide() {
     world.features = world.features.filter((b) => b.properties['ISO_A2'] != 'AQ');
     return {
