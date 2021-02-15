@@ -28,11 +28,29 @@
 .bg-bond-dark-red {
     background-color: var(--bond-dark-red);
 }
+.bg-bond-darkest-red {
+    background-color: var(--bond-darkest-red);
+}
 .bg-bond-grey {
     background-color: var(--bond-grey);
 }
 .bg-bond-white {
     background-color: var(--bond-white);
+}
+.border-bond-red {
+    border-color: var(--bond-red);
+}
+.border-bond-dark-red {
+    border-color: var(--bond-dark-red);
+}
+.border-bond-darkest-red {
+    border-color: var(--bond-darkest-red);
+}
+.border-bond-grey {
+    border-color: var(--bond-grey);
+}
+.border-bond-white {
+    border-color: var(--bond-white);
 }
 .fill-bond-red {
     fill: var(--bond-red);

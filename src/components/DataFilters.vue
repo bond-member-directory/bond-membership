@@ -127,7 +127,7 @@ export default {
 
 .sdg-grid {
   --min: 10ch;
-  --gap: 0rem;
+  --gap: 0.25rem;
 }
 
 .o-100-hover:hover {

@@ -1,9 +1,9 @@
 <template>
-    <div class="fl bg-bond-grey br3">
+    <div class="fl bg-bond-grey br3 bb bw4 border-bond-dark-red">
       <header class="w-100 bg-bond-dark-red white ph2 pv3 br3 br--top">
-        <h3 class="pa0 ma0 f4">{{ member.name }} - {{order}}</h3>
+        <h3 class="pa0 ma0 f4">{{ member.name }}</h3>
         <template v-if="(order < 4) && member.logoUrl">
-          <img :src="member.logoUrl" class="br-100 fr org-logo" />
+          <img :src="member.logoUrl" class="br-100 fr org-logo border-bond-dark-red bw3 ba w3" />
         </template>
       </header>
       <div class="w-100 pa2">
@@ -79,7 +79,7 @@ export default {
 
 <style scoped>
 .org-logo {
-    top: -60px;
+    top: -50px;
     position: relative;
 }
 </style>

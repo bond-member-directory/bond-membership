@@ -1,4 +1,5 @@
 <template>
+  <div class="w-100 white bg-bond-darkest-red pa3 tc"><strong>!! Work in Progress !!</strong></div>
   <PageHeader />
   <div class="w-100 ph4">
     <a href="#" @click.prevent="showMap = !showMap" class="fr"><template v-if="showMap">Hide map</template><template v-else>Show map</template></a>
