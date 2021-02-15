@@ -11,7 +11,7 @@
         placeholder="Filter by country"
         class="w-100 bg-bond-grey"
       />
-      <a href="#" class="fr bond-dark-blue link underline f5 mt2" @click.prevent="clearCountry">Clear</a>
+      <a href="#" class="fr bond-red link underline bond-link b f5 mt2" @click.prevent="clearCountry">Clear</a>
     </div>
     <div class="dn">
       <Multiselect
@@ -23,7 +23,7 @@
         placeholder="Filter by Sustainable Development Goal"
         class="w-100 bg-bond-grey"
       />
-      <a href="#" class="fr bond-dark-blue link underline f5 mt2" @click.prevent="clearSDG">Clear</a>
+      <a href="#" class="fr bond-red link underline bond-link b f5 mt2" @click.prevent="clearSDG">Clear</a>
     </div>
     <div class="">
       <input :value="filters.search"
@@ -36,8 +36,8 @@
   </div>
   <div class="w-100 pt2 pb3 ph4">
     <div class="mb2 f4">
+      <a href="#" class="fr bond-red link underline bond-link b f5" @click.prevent="clearSDG">Clear</a>
       <label for="filterSDG" class="b">Sustainable Development Goals</label><span class="" v-if="hoverSDG">: {{ hoverSDG }}</span>
-      <a href="#" class="fr bond-dark-blue link underline f5 mt2" @click.prevent="clearSDG">Clear</a>
     </div>
     <ul class="ma0 pa0 list smol-css-grid sdg-grid" id="filterSDG">
       <li v-for="(sdg, index) in sdgSelectValues" :key="index" class="di">

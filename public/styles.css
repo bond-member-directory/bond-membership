@@ -127,3 +127,12 @@
 strong, h1, h2, h3, h4, .b {
     font-weight: bold;
 }
+
+.bond-link {
+    text-underline-position: under;
+    text-decoration-style: dashed;
+}
+.bond-link:hover {
+    text-underline-position: under;
+    text-decoration-style: solid;
+}

@@ -7,8 +7,8 @@
         </template>
       </header>
       <div class="w-100 pa2">
-        <p v-if="member.website" class="mh0 mv1 pa0">
-          <a :href="cleanWebsite(member.website)" class="b bond-dark-blue link underline f5">{{ displayWebsite(member.website) }}</a>
+        <p v-if="member.website" class="mh0 mt1 mb2 pa0">
+          <a :href="cleanWebsite(member.website)" class="b bond-red link underline bond-link f5">{{ displayWebsite(member.website) }}</a>
         </p>
         <p v-if="member.yearjoined" class="mh0 mv1 pa0">
           Bond Member since {{ member.yearjoined.slice(0, 4) }}
@@ -16,7 +16,7 @@
         <div v-if="member.countries.length > 0" class="mh0 mv1 pa0">
           Works in
           <span v-if="member.countries.length < 4">
-            <a href="#" @click.prevent="selectCountry(country)" v-for="country in member.countries" :key="country">{{ countries[country] }} ({{ country }})</a>
+            <a href="#" class="b bond-red link underline bond-link" @click.prevent="selectCountry(country)" v-for="country in member.countries" :key="country">{{ countries[country] }} ({{ country }})</a>
           </span>
           <span v-else>{{ member.countries.length }} countries</span>
           <!--<ul>

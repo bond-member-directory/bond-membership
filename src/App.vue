@@ -2,7 +2,7 @@
   <div class="w-100 white bg-bond-darkest-red pa3 tc"><strong>!! Work in Progress !!</strong></div>
   <PageHeader />
   <div class="w-100 ph4">
-    <a href="#" @click.prevent="showMap = !showMap" class="fr bond-dark-blue link underline f5"><template v-if="showMap">Hide map</template><template v-else>Show map</template></a>
+    <a href="#" @click.prevent="showMap = !showMap" class="fr bond-red link underline bond-link b f5"><template v-if="showMap">Hide map</template><template v-else>Show map</template></a>
   </div>
   <div class="w-100">
     <div class="fl" :class="{ 'w-50': showMap }">
