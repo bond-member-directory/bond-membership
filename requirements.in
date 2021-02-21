@@ -1,0 +1,6 @@
+simple-salesforce
+python-dotenv
+tqdm
+isort
+black
+click

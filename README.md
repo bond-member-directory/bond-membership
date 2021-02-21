@@ -22,3 +22,18 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Update data from salesforce
+
+Install requirements:
+
+```bash
+pip install -r requirements.txt
+```
+
+Fetch data from Salesforce:
+
+```bash
+python fetch-data
+```
