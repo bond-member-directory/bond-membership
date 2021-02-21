@@ -1,23 +1,21 @@
 <template>
   <div class="fl bg-bond-grey bw4 border-bond-dark-red f4">
     <header class="w-100 bg-bond-dark-red white ph3 pv3">
+      <img
+        v-if="order < 4 && member.logoUrl"
+        :src="member.logoUrl"
+        class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
+      />
+      <div
+        v-else
+        :style="{
+          backgroundColor: randomColour(),
+          width: '80px',
+          height: '80px',
+        }"
+        class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
+      ></div>
       <h3 class="pa0 ma0 f4">{{ member.name }}</h3>
-      <template v-if="order < 4 && member.logoUrl">
-        <img
-          :src="member.logoUrl"
-          class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
-        />
-      </template>
-      <template v-else>
-        <div
-          :style="{
-            backgroundColor: randomColour(),
-            width: '80px',
-            height: '80px',
-          }"
-          class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
-        ></div>
-      </template>
     </header>
     <div class="w-100 pa3">
       <p v-if="member.website" class="mh0 mt1 mb3 pa0">
@@ -142,7 +140,7 @@ export default {
 
 <style scoped>
 .org-logo {
-  top: -50px;
+  top: -28px;
   position: relative;
 }
 </style>
