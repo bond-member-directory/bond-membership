@@ -1,5 +1,8 @@
 <template>
-  <div class="fl bg-bond-grey bw4 border-bond-dark-red f4">
+  <div
+    class="fl bg-bond-grey bw4 border-bond-dark-red f4"
+    :class="{ 'w-100': full }"
+  >
     <header class="w-100 bg-bond-dark-red white ph3 pv3">
       <img
         v-if="order < 4 && member.logoUrl"
@@ -15,9 +18,16 @@
         }"
         class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
       ></div>
-      <h3 class="pa0 ma0 f4">{{ member.name }}</h3>
+      <h3 class="pa0 ma0 f4">
+        <a
+          href="#"
+          class="link white underline"
+          @click.prevent="selectMember()"
+          >{{ member.name }}</a
+        >
+      </h3>
     </header>
-    <div class="w-100 pa3">
+    <div class="pa3 fl" :class="{ 'w-50': full, 'w-100': !full }">
       <p v-if="member.website" class="mh0 mt1 mb3 pa0">
         <a
           :href="cleanWebsite(member.website)"
@@ -29,8 +39,8 @@
         Bond Member since {{ member.yearjoined.slice(0, 4) }}
       </p>
       <div v-if="member.countries.length > 0" class="mh0 mv3 pa0">
-        <template v-if="member.countries.length < 4">
-          Works in 
+        <template v-if="member.countries.length < 4 || full">
+          Works in
           <template class="" v-for="country in member.countries" :key="country">
             <a
               href="#"
@@ -41,10 +51,18 @@
           </template>
         </template>
         <details v-else>
-          <summary class="pointer">Works in {{ member.countries.length }} countries</summary>
-          <ul class="list mh0 mb0 mt2 pa0" style="max-height: 7rem; overflow-y: auto;">
+          <summary class="pointer">
+            Works in {{ member.countries.length }} countries
+          </summary>
+          <ul
+            class="list mh0 mb0 mt2 pa0"
+            style="max-height: 7rem; overflow-y: auto"
+          >
             <li v-for="country in member.countries" v-bind:key="country">
-              <a href="#" @click.prevent="selectCountry(country)"
+              <a
+                href="#"
+                class="b bond-red link underline bond-link"
+                @click.prevent="selectCountry(country)"
                 >{{ countries[country] }} ({{ country }})</a
               >
             </li>
@@ -52,7 +70,7 @@
         </details>
       </div>
       <div v-if="member.sdgs.length > 0" class="mh0 mv3 pa0">
-        <template v-if="member.sdgs.length < 4">
+        <template v-if="member.sdgs.length < 4 || full">
           Sustainable Development Goals
           <ul class="list mh0 mb0 mt2 pa0 flex flex-wrap">
             <li
@@ -84,11 +102,19 @@
         </details>
       </div>
     </div>
+    <div class="pa3 w-50 fl" v-if="full && member.countries.length > 0" ref="worldmapcontainer">
+      <world-map
+        :countryValues="Object.fromEntries(member.countries.map((c) => [c, 1]))"
+        :defaultClasses="['fill-bond-mid-grey', 'stroke-bond-mid-grey']"
+        :selectedClasses="['fill-bond-dark-red', 'stroke-bond-dark-red']"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import filterStore from "../FilterStore.js";
+import WorldMap from "./WorldMap.vue";
 
 export default {
   name: "MemberCard",
@@ -96,6 +122,26 @@ export default {
   props: {
     member: Object,
     order: Number,
+    full: Boolean,
+  },
+  components: {
+    WorldMap,
+  },
+  computed: {
+    mapContainerHeight: function () {
+      console.log(this.$refs);
+      if (this.$refs.worldMapContainer) {
+        return this.$refs.worldMapContainer.clientHeight;
+      }
+      return 400;
+    },
+    mapContainerWidth: function () {
+      console.log(this.$refs);
+      if (this.$refs.worldMapContainer) {
+        return this.$refs.worldMapContainer.clientWidth;
+      }
+      return 400;
+    },
   },
   methods: {
     sdgIcon: function (sdg) {
@@ -106,6 +152,9 @@ export default {
     },
     selectSDG: function (sdg) {
       filterStore.setSDG(sdg);
+    },
+    selectMember: function () {
+      filterStore.setMemberSelected(this.member.id);
     },
     cleanWebsite: function (url) {
       if (url.startsWith("http") || url.startsWith("//")) {
@@ -121,7 +170,7 @@ export default {
       }
       return displayUrl.hostname.replace("www.", "");
     },
-    randomColour: function(){
+    randomColour: function () {
       var colours = [
         "#FFEE5F",
         "#00C8D2",
@@ -133,7 +182,7 @@ export default {
         "#7D004B",
       ];
       return colours[Math.floor(Math.random() * colours.length)];
-    }
+    },
   },
 };
 </script>

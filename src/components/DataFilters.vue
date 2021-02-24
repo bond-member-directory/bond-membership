@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 pv3 ph4 smol-flexbox-grid">
+  <div class="w-100 mv3 smol-flexbox-grid">
     <div class="">
       <Multiselect
         v-model="filters.country"
@@ -11,7 +11,7 @@
         placeholder="Filter by country"
         class="w-100 bg-bond-grey"
       />
-      <a href="#" class="fr bond-red link underline bond-link b f5 mt2" @click.prevent="clearCountry">Clear</a>
+      <!-- <a href="#" class="fr bond-red link underline bond-link b f5 mt2" @click.prevent="clearCountry">Clear</a> -->
     </div>
     <div class="dn">
       <Multiselect
@@ -23,7 +23,7 @@
         placeholder="Filter by Sustainable Development Goal"
         class="w-100 bg-bond-grey"
       />
-      <a href="#" class="fr bond-red link underline bond-link b f5 mt2" @click.prevent="clearSDG">Clear</a>
+      <!-- <a href="#" class="fr bond-red link underline bond-link b f5 mt2" @click.prevent="clearSDG">Clear</a> -->
     </div>
     <div class="">
       <input :value="filters.search"
@@ -34,9 +34,9 @@
       />
     </div>
   </div>
-  <div class="w-100 pt2 pb3 ph4">
+  <div class="w-100 mv3">
     <div class="mb2 f4">
-      <a href="#" class="fr bond-red link underline bond-link b f5" @click.prevent="clearSDG">Clear</a>
+      <a href="#" class="fr bond-red link underline bond-link b f5" @click.prevent="clearSDG">Clear filters</a>
       <label for="filterSDG" class="b">Sustainable Development Goals</label><span class="" v-if="hoverSDG">: {{ hoverSDG }}</span>
     </div>
     <ul class="ma0 pa0 list smol-css-grid sdg-grid" id="filterSDG">
@@ -97,6 +97,11 @@ export default {
     clearSDG: function(){
       filterStore.clearSDG();
     },
+    clearFilters: function(){
+      filterStore.clearSDG();
+      filterStore.clearCountry();
+      filterStore.clearSearch();
+    },
     setSearch: function(event){
       filterStore.setSearch(event.target.value);
     },
@@ -126,7 +131,7 @@ export default {
 }
 
 .sdg-grid {
-  --min: 10ch;
+  --min: 9ch;
   --gap: 0.25rem;
 }
 

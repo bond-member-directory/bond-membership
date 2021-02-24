@@ -4,14 +4,7 @@
     @mouseleave="$emit('hoverCountry', {})"
     @click="$emit('selectCountry', countryProps)"
     stroke-width="0.5"
-    :class="{
-      'fill-bond-dark-red': countrySelected && !countryHovered,
-      'fill-bond-red': countryHovered,
-      'fill-bond-grey': !countryHovered && !countrySelected,
-      'stroke-bond-dark-red': countrySelected && !countryHovered,
-      'stroke-bond-red': countryHovered,
-      'stroke-bond-grey': !countryHovered && !countrySelected,
-    }"
+    :class="countryClasses"
     />
 </template>
 
@@ -23,11 +16,34 @@ export default {
     countryProps: null,
     countrySelected: Boolean,
     countryHovered: Boolean,
+    defaultClasses: {
+      type: Array,
+      default: () => ['fill-bond-grey', 'stroke-bond-grey'],
+    },
+    selectedClasses: {
+      type: Array,
+      default: () => ['fill-bond-dark-red', 'stroke-bond-dark-red'],
+    },
+    hoveredClasses: {
+      type: Array,
+      default: () => ['fill-bond-red', 'stroke-bond-red'],
+    },
   },
   data() {
     return {
       hover: false,
     };
+  },
+  computed: {
+    countryClasses: function(){
+      if(this.countrySelected && !this.countryHovered){
+        return this.selectedClasses;
+      }
+      if(this.countryHovered){
+        return this.hoveredClasses;
+      }
+      return this.defaultClasses;
+    }
   },
   methods: {
     onHover: function(){

@@ -7,6 +7,7 @@ export default {
       country: [],
       sdg: [],
       search: '',
+      memberSelected: null,
     }),
   
     setCountry(newValue) {
@@ -62,6 +63,13 @@ export default {
       }
   
       this.state.search = '';
+    },
+
+    setMemberSelected(memberId){
+      this.state.memberSelected = memberId;
+    },
+    clearMemberSelected(){
+      this.state.memberSelected = null;
     },
 
     memberIsSelected(member){

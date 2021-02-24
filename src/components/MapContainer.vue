@@ -1,5 +1,5 @@
 <template>
-  <svg :width="width" :height="width">
+  <svg :width="width" :height="height">
     <g class="dark-shadow">
       <map-country 
         v-for="p in paths"

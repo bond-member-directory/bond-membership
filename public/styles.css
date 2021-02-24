@@ -55,6 +55,12 @@
 .fill-bond-red {
     fill: var(--bond-red);
 }
+.fill-bond-white {
+    fill: var(--bond-white);
+}
+.fill-bond-mid-grey {
+    fill: var(--bond-mid-grey);
+}
 .fill-bond-dark-red {
     fill: var(--bond-dark-red);
 }
@@ -63,6 +69,12 @@
 }
 .stroke-bond-red {
     stroke: var(--bond-red);
+}
+.stroke-bond-white {
+    stroke: var(--bond-white);
+}
+.stroke-bond-mid-grey {
+    stroke: var(--bond-mid-grey);
 }
 .stroke-bond-dark-red {
     stroke: var(--bond-dark-red);
