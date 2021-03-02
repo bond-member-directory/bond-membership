@@ -194,5 +194,6 @@ export default {
 .org-logo {
   top: -28px;
   position: relative;
+  margin-bottom: -28px;
 }
 </style>

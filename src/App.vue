@@ -59,7 +59,7 @@ export default {
       filters: filterStore.state,
       members: Object.values(members.members).sort(
         (a, b) =>
-          a.name.replace(/^(the )/i, "").toLowerCase() > b.name.replace(/^(the )/i, "").toLowerCase()
+          a.name.replace(/^(the )/i, "").toLowerCase().localeCompare(b.name.replace(/^(the )/i, "").toLowerCase())
       ),
     };
   },

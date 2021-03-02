@@ -30,7 +30,7 @@
         type="search"
         @keyup.prevent="setSearch"
         placeholder="Search organisations"
-        class="w-100 bg-bond-grey pa2 bw0"
+        class="w-100 bg-bond-grey pa2 bw0 filter"
       />
     </div>
   </div>
@@ -137,5 +137,9 @@ export default {
 
 .o-100-hover:hover {
   opacity: 1;
+}
+
+.filter {
+  padding: 0.69rem;
 }
 </style>
