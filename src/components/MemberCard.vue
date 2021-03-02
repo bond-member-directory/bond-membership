@@ -6,6 +6,9 @@
     <header class="w-100 bg-bond-dark-red white ph3 pv3">
       <img
         v-if="order < 4 && member.logoUrl"
+        :style="{
+          backgroundColor: randomColour(),
+        }"
         :src="member.logoUrl"
         class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
       />

@@ -59,7 +59,7 @@ export default {
       filters: filterStore.state,
       members: Object.values(members.members).sort(
         (a, b) =>
-          a.name.replace(/^(the )/i, "") > b.name.replace(/^(the )/i, "")
+          a.name.replace(/^(the )/i, "").toLowerCase() > b.name.replace(/^(the )/i, "").toLowerCase()
       ),
     };
   },
@@ -67,7 +67,6 @@ export default {
     world.features = world.features.filter(
       (b) => b.properties["ISO_A2"] != "AQ"
     );
-    console.log(this.members);
     return {
       world: world,
       countries: Object.fromEntries(
