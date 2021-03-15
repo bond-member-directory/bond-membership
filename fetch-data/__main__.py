@@ -2,15 +2,14 @@ import json
 
 import click
 from fetch_charitybase import (
-    SDG_NAMES,
     clean_object,
-    fetch_sdgs,
     get_charity_numbers,
     get_charitybase_data,
     get_iso_lookup,
 )
 from fetch_salesforce import fetch_data, get_salesforce_instance
 from settings import FINAL_OUTPUT
+from sdgs import clean_sdgs, SDG_NAMES
 
 
 @click.command()
@@ -21,8 +20,8 @@ def main(output):
     members = fetch_data(sf)
     click.echo(f"Fetched {len(members):,.0f} records from salesforce")
 
-    click.echo("Import data on SDGs")
-    sdgs = fetch_sdgs()
+    click.echo("Clean SDG data")
+    members = dict(clean_sdgs(members))
     click.echo("Get Charity Commission key -> ISO country code lookups")
     iso_lookup = get_iso_lookup()
     click.echo("Extract charity numbers to fetch")
@@ -36,11 +35,12 @@ def main(output):
         charity = charity_data.get(
             m["Charity_Commission_number__c"],
             {
-                "logoUrl": None,
+                "logourl": None,
+                "activities": None,
                 "countries": [],
             },
         )
-        members[k] = {**clean_object(m), **charity, "sdgs": sdgs.get(m["Name"], [])}
+        members[k] = {**clean_object(m), **charity}
 
     click.echo("Write data to output file")
     with open(output, "w", encoding="utf8") as a:

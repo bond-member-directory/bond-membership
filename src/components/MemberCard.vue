@@ -5,11 +5,11 @@
   >
     <header class="w-100 bg-bond-dark-red white ph3 pv3">
       <img
-        v-if="order < 4 && member.logoUrl"
+        v-if="order < 4 && member.logourl"
         :style="{
           backgroundColor: randomColour(),
         }"
-        :src="member.logoUrl"
+        :src="member.logourl"
         class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
       />
       <div
@@ -30,7 +30,15 @@
         >
       </h3>
     </header>
-    <div class="pa3 fl" :class="{ 'w-50': full, 'w-100': !full }">
+    <div class="w-100 pa3">
+    <div class="w-100 w-50-ns fr" v-if="full && member.countries.length > 0" ref="worldmapcontainer">
+      <world-map
+        :countryValues="Object.fromEntries(member.countries.map((c) => [c, 1]))"
+        :defaultClasses="['fill-bond-mid-grey', 'stroke-bond-mid-grey']"
+        :selectedClasses="['fill-bond-dark-red', 'stroke-bond-mid-grey']"
+      />
+    </div>
+    <div class="" :class="{ '': full }">
       <p v-if="member.website" class="mh0 mt1 mb3 pa0">
         <a
           :href="cleanWebsite(member.website)"
@@ -38,7 +46,10 @@
           >{{ displayWebsite(member.website) }}</a
         >
       </p>
-      <p v-if="member.yearjoined" class="mh0 mv2 pa0">
+      <p v-if="member.activities && full" class="mh0 mt1 mb3 pa0 measure">
+        {{member.activities}}
+      </p>
+      <p v-if="member.yearjoined && full" class="mh0 mv2 pa0">
         Bond Member since {{ member.yearjoined.slice(0, 4) }}
       </p>
       <div v-if="member.countries.length > 0" class="mh0 mv3 pa0">
@@ -54,14 +65,12 @@
           </template>
         </template>
         <details v-else>
-          <summary class="pointer">
-            Works in {{ member.countries.length }} countries
-          </summary>
+          <summary class="pointer">Works in {{ member.countries.length }} countries</summary>
           <ul
             class="list mh0 mb0 mt2 pa0"
             style="max-height: 7rem; overflow-y: auto"
           >
-            <li v-for="country in member.countries" v-bind:key="country">
+            <li v-for="country in member.countries" v-bind:key="country" class="mb2">
               <a
                 href="#"
                 class="b bond-red link underline bond-link"
@@ -104,13 +113,7 @@
           </ul>
         </details>
       </div>
-    </div>
-    <div class="pa3 w-50 fl" v-if="full && member.countries.length > 0" ref="worldmapcontainer">
-      <world-map
-        :countryValues="Object.fromEntries(member.countries.map((c) => [c, 1]))"
-        :defaultClasses="['fill-bond-mid-grey', 'stroke-bond-mid-grey']"
-        :selectedClasses="['fill-bond-dark-red', 'stroke-bond-dark-red']"
-      />
+      </div>
     </div>
   </div>
 </template>

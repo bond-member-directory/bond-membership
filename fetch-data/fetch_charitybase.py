@@ -32,31 +32,13 @@ query($ids: [ID]){
         areas {
           id
           name
-        }
+        },
+        activities
       }
     }
   }
 }
 """
-SDG_NAMES = {
-    "No poverty": "01",
-    "Zero hunger": "02",
-    "Good health and wellbeing": "03",
-    "Quality education": "04",
-    "Gender equality": "05",
-    "Clean water and sanitation": "06",
-    "Affordable and clean energy": "07",
-    "Decent work and economic growth": "08",
-    "Industry, innovation and infrastructure": "09",
-    "Reduced inequalities": "10",
-    "Sustainable cities and communities": "11",
-    "Responsible consumption and production": "12",
-    "Climate action": "13",
-    "Life below water": "14",
-    "Life on land": "15",
-    "Peace, justice and strong institutions": "16",
-    "Partnerships for the goals": "17",
-}
 
 
 def split_list(input_list, n=10):
@@ -97,30 +79,20 @@ def get_charitybase_data(charity_numbers, iso_lookup):
             result = res.json()
             for charity in result["data"]["CHC"]["getCharities"]["list"]:
                 results[charity["id"]] = {
-                    "logoUrl": charity.get("image", {}).get("logo", {}).get("medium")
+                    "logourl": charity.get("image", {}).get("logo", {}).get("medium")
                     if charity.get("image")
                     else None,
-                    "countries": list(
+                    "countries": sorted(
                         set(
                             iso_lookup[a["id"]]
                             for a in charity.get("areas", [])
                             if a["id"] in iso_lookup
                         )
                     ),
+                    "activities": charity.get("activities", ""),
                 }
             pbar.update(len(chunk))
     return results
-
-
-def fetch_sdgs():
-    sdgs = {}
-    with open(SDGS_INPUT, encoding="latin1") as a:
-        reader = csv.DictReader(a)
-        for row in reader:
-            sdgs[row["Organisation Name"]] = [
-                code for name, code in SDG_NAMES.items() if int(row[name]) == 1
-            ]
-    return sdgs
 
 
 if __name__ == "__main__":
@@ -134,7 +106,7 @@ if __name__ == "__main__":
         charity = charity_data.get(
             m["Charity_Commission_number__c"],
             {
-                "logoUrl": None,
+                "logourl": None,
                 "countries": [],
             },
         )
