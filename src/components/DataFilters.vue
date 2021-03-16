@@ -22,6 +22,18 @@
             class="w-100 bg-bond-grey pa2 bw0 filter"
           />
         </div>
+        <div class="">
+          <Multiselect
+            v-model="filters.country"
+            :options="countrySelectValues"
+            :searchable="true"
+            mode="tags"
+            :maxHeight="240"
+            @change="setCountry"
+            placeholder="Filter by country"
+            class="w-100 bg-bond-grey"
+          />
+        </div>
       </div>
       <div class="w-100 mv3">
         <div class="mb2 f4">
@@ -39,18 +51,6 @@
             }" />
           </label>
         </div>
-      </div>
-      <div class="mv3 w-100">
-        <Multiselect
-          v-model="filters.country"
-          :options="countrySelectValues"
-          :searchable="true"
-          mode="tags"
-          :maxHeight="240"
-          @change="setCountry"
-          placeholder="Filter by country"
-          class="w-100 bg-bond-grey"
-        />
       </div>
       <div class="mv3 w-100 tr">
         <a href="#" class="bond-red link underline bond-link b f5 ml3" @click.prevent="clearFilters">Clear filters</a>

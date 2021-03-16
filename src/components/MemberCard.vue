@@ -112,7 +112,7 @@
             style="max-height: 7rem; overflow-y: auto"
           >
             <li v-for="country in member.countries.map((c) => countries[c]).sort()" v-bind:key="country" class="mb2">
-              {{ countries[country] }}
+              {{country}}
             </li>
           </ul>
         </details>
