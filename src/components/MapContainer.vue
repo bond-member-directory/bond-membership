@@ -1,30 +1,30 @@
 <template>
-  <svg :width="width" :height="height">
-    <g class="dark-shadow">
-      <map-country 
-        v-for="p in paths"
-        :path="p[1]"
-        :countryProps="p[0]"
-        :key="p"
-        @hover-country="hoveredCountry = $event"
-        @select-country="zoomMap($event)"
-        :countrySelected="countryIsSelected(p[0])"
-        :countryHovered="countryIsHovered(p[0])" />
-    </g>
-  </svg>
-  <button @click="zoomMap(null)" v-if="zoomLevel > 0">Zoom to world</button>
-  <p class="pa3 bg-bond-red white" v-if="selectedCountryName">{{ selectedCountryName }}</p>
+  <WorldMap
+    :countryValues="countryValues"
+    :colourScaleColours='colourScaleColours'
+    :selectedCountry="filters.country"
+    @select-country="selectCountry($event)"
+  />
+  <p class="tr bond-mid-grey">Area of operation data from Charity Commission for England and Wales.</p>
 </template>
 
 <script>
 const d3 = { ...require('d3'), ...require('d3-geo') };
+const COLOUR_SCALE = [
+  "white",
+  // "#D50032",
+  // "#B6002D",
+  "#A20026",
+  "#8A0026",
+  // "#560014",
+];
 
 import filterStore from '../FilterStore.js';
-import MapCountry from './MapCountry.vue'
+import WorldMap from './WorldMap.vue';
 
 export default {
   name: 'MapContainer',
-  inject: ['world'],
+  inject: ['world', 'members'],
   props: {
     center: {
       type: Array,
@@ -47,6 +47,7 @@ export default {
       fieldToUse: 'REGION_WB',
       zoomLevel: 0,
       filters: filterStore.state,
+      colourScaleColours: COLOUR_SCALE,
     };
   },
   computed: {
@@ -59,8 +60,23 @@ export default {
         return this.selectedCountry[this.fieldToUse];
       }
     },
+    countryValues: function(){
+      var members = this.members.filter((member) => filterStore.memberIsSelected(member));
+      var memberCount = [].concat.apply(
+        [],
+        members.map((member) => member["countries"])
+      ).reduce(
+        (acc, e) => acc.set(e, (acc.get(e) || 0) + 1),
+        new Map()
+      );
+      memberCount.delete("GB");
+      return memberCount;
+    }
   },
   methods: {
+    selectCountry: function(country){
+      filterStore.setCountry(country.ISO_A2);
+    },
     countryIsSelected: function(country){
       if(!this.selectedCountry){
         return false;
@@ -117,7 +133,7 @@ export default {
     this.paths = this.world.features.map((b) => [b.properties, this.geoGenerator(b)]);
   },
   components: {
-    MapCountry
+    WorldMap,
   },
 };
 </script>

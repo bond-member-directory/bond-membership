@@ -64,6 +64,9 @@
 .fill-bond-dark-red {
     fill: var(--bond-dark-red);
 }
+.fill-bond-darkest-red {
+    fill: var(--bond-darkest-red);
+}
 .fill-bond-grey {
     fill: var(--bond-grey);
 }
@@ -78,6 +81,9 @@
 }
 .stroke-bond-dark-red {
     stroke: var(--bond-dark-red);
+}
+.stroke-bond-darkest-red {
+    stroke: var(--bond-darkest-red);
 }
 .stroke-bond-grey {
     stroke: var(--bond-grey);
@@ -147,4 +153,14 @@ strong, h1, h2, h3, h4, .b {
 .bond-link:hover {
     text-underline-position: under;
     text-decoration-style: solid;
+}
+
+.sr-only {
+    clip: rect(0 0 0 0); 
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap; 
+    width: 1px;
 }

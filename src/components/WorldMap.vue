@@ -1,18 +1,33 @@
 <template>
-  <div ref="worldmap" style="width: 100%">
+  <div ref="worldmap" style="width: 100%;">
     <svg :width="width" :height="height">
       <g class="dark-shadow">
         <map-country
-          v-for="p in paths"
+          v-for="p in unSelectedPaths"
           :path="p[1]"
-          :countryProps="p[0]"
           :key="p"
-          :countrySelected="Object.keys(countryValues).includes(p[0].ISO_A2)"
-          :defaultClasses="defaultClasses"
-          :selectedClasses="selectedClasses"
+          :style="countryStyle(p[0])"
+          @mousemove='onHover($event, p[0])'
+          @mouseleave="leaveHover"
+          @click="$emit('select-country', p[0])"
+        />
+        <map-country
+          v-for="p in selectedPaths"
+          :path="p[1]"
+          :key="p"
+          :style="countryStyle(p[0])"
+          @mousemove='onHover($event, p[0])'
+          @mouseleave="leaveHover"
+          @click="$emit('select-country', p[0])"
         />
       </g>
     </svg>
+    <WorldMapTooltip
+      v-if="mouseLocation"
+      :x="mouseLocation.x"
+      :y="mouseLocation.y"
+      :title="tooltipText"
+    />
   </div>
 </template>
 
@@ -20,6 +35,7 @@
 const d3 = { ...require("d3"), ...require("d3-geo") };
 
 import MapCountry from "./MapCountry.vue";
+import WorldMapTooltip from "./WorldMapTooltip.vue";
 
 export default {
   name: "WorldMap",
@@ -34,8 +50,16 @@ export default {
       default: 1 << 20,
     },
     countryValues: {
-      type: Object,
-      default: () => {},
+      type: Map,
+      default: () => (new Map()),
+    },
+    selectedCountry: {
+      type: Array,
+      default: () => [],
+    },
+    colourScaleColours: {
+      type: Array,
+      default: () => ["white", "blue"],
     },
     defaultClasses: {
       type: Array,
@@ -57,26 +81,71 @@ export default {
       projection: null,
       geoGenerator: null,
       paths: [],
-      selectedCountry: null,
       hoveredCountry: null,
       fieldToUse: "REGION_WB",
       zoomLevel: 0,
+      mouseLocation: null,
+      tooltipText: null,
+      hoveredCountries: [],
+      hoverField: "NAME",
     };
   },
-  //   computed: {
-  //     selectedCountryName: function(){
-  //       if(!this.selectedCountry){
-  //         return null;
-  //       } else if(this.zoomLevel > 1){
-  //         return this.selectedCountry["NAME_EN"];
-  //       } else {
-  //         return this.selectedCountry[this.fieldToUse];
-  //       }
-  //     },
-  //   },
+  computed: {
+    colourScale: function(){
+      var max_value = Math.max(...this.countryValues.values());
+      // var min_value = Math.min(...this.countryValues.values(), 0);
+      return d3.scaleSqrt().domain([0, max_value])
+        .range(this.colourScaleColours);
+    },
+    selectedPaths: function(){
+      return this.paths.filter((p) => this.selectedCountry.includes(p[0]["ISO_A2"]));
+    },
+    unSelectedPaths: function(){
+      return this.paths.filter((p) => !this.selectedCountry.includes(p[0]["ISO_A2"]));
+    }
+  },
   methods: {
+    countryColour: function(country){
+      var value = this.countryValues.get(country);
+      return this.colourScale(value);
+    },
+    countryStyle: function(country){
+      var style = {
+        fill: this.countryColour(country.ISO_A2),
+        stroke: this.countryColour(country.ISO_A2),
+        strokeOpacity: 1,
+        opacity: 1,
+        strokeWidth: 1,
+        cursor: 'pointer',
+      }
+      if(this.hoveredCountries.includes(country[this.hoverField])){
+        style.fill = '#D50032';
+        style.stroke = '#D50032';
+      }
+      if(this.selectedCountry.includes(country["ISO_A2"])){
+        style.stroke = 'yellow';
+        style.strokeWidth = 3;
+      }
+      return style;
+    },
+    onHover: function(ev, country){
+      if(this.countryValues.get(country.ISO_A2)){
+        this.tooltipText = country[this.hoverField] + "\n" + this.countryValues.get(country.ISO_A2) + " members";
+      } else {
+        this.tooltipText = country[this.hoverField];
+      }
+      this.hoveredCountries = [country[this.hoverField]];
+      this.mouseLocation = {
+          x: ev.pageX,
+          y: ev.pageY,
+      };
+    },
+    leaveHover: function(){
+      this.mouseLocation = null;
+      this.hoveredCountries = [];
+    },
     onResize: function () {
-      const { width } = this.$refs.worldmap.getBoundingClientRect();
+      const { width } = this.$refs.worldmap.parentElement.getBoundingClientRect();
       this.width = width;
       this.height = width / 2;
       this.projection = d3
@@ -145,6 +214,7 @@ export default {
   },
   components: {
     MapCountry,
+    WorldMapTooltip,
   },
 };
 </script>

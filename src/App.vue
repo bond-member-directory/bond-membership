@@ -18,26 +18,7 @@
   </template>
   <template v-else>
     <DataFilters />
-    <div class="w-100">
-      <a
-        href="#"
-        @click.prevent="showMap = !showMap"
-        class="fr bond-red link underline bond-link b f5"
-        ><template v-if="showMap">Hide map</template
-        ><template v-else>Show map</template></a
-      >
-    </div>
-    <div class="w-100">
-      <div
-        class="mb0 mt4 grid-container w-100"
-        :class="{ 'with-map': showMap }"
-      >
-        <CardContainer />
-        <div style="grid-area: map" v-if="showMap">
-          <MapContainer />
-        </div>
-      </div>
-    </div>
+    <CardContainer />
   </template>
 </template>
 
@@ -45,7 +26,6 @@
 import DataFilters from "./components/DataFilters.vue";
 import PageHeader from "./components/PageHeader.vue";
 import CardContainer from "./components/CardContainer.vue";
-import MapContainer from "./components/MapContainer.vue";
 import MemberCard from "./components/MemberCard.vue";
 import world from "./assets/world.json";
 import members from "./assets/bond_members.json";
@@ -55,7 +35,6 @@ export default {
   name: "App",
   data: function () {
     return {
-      showMap: false,
       filters: filterStore.state,
       members: Object.values(members.members).sort(
         (a, b) =>
@@ -87,7 +66,6 @@ export default {
   components: {
     PageHeader,
     CardContainer,
-    MapContainer,
     MemberCard,
     DataFilters,
   },
@@ -108,15 +86,16 @@ export default {
   grid-template-columns: 50% auto;
   grid-template-rows: auto;
   grid-template-areas:
-    "cardheader cardheader"
     "map map"
+    "cardheader cardheader"
     "cards cards";
 }
 @media screen and (min-width:60em) {
   .grid-container.with-map {
     grid-template-areas:
+      "map map"
       "cardheader cardheader"
-      "cards map";
+      "cards cards";
   }
 }
 </style>

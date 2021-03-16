@@ -1,11 +1,8 @@
 <template>
   <path :d="path"
-    @mouseover="$emit('hoverCountry', countryProps)"
-    @mouseleave="$emit('hoverCountry', {})"
-    @click="$emit('selectCountry', countryProps)"
-    stroke-width="0.5"
     :class="countryClasses"
-    />
+    ref="countryPath"
+  />
 </template>
 
 <script>
@@ -13,7 +10,6 @@ export default {
   name: 'MapCountry',
   props: {
     path: null,
-    countryProps: null,
     countrySelected: Boolean,
     countryHovered: Boolean,
     defaultClasses: {
@@ -32,6 +28,7 @@ export default {
   data() {
     return {
       hover: false,
+      mouseLocation: null,
     };
   },
   computed: {
@@ -46,12 +43,6 @@ export default {
     }
   },
   methods: {
-    onHover: function(){
-        this.$emit('selectCountry', this.countryProps);
-    },
-    leaveHover: function(){
-        this.$emit('selectCountry', {});
-    },
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <header class="w-100 bg-white mb3">
+  <header class="w-100 bg-white mb3 cf">
     <div class="w-100 f4">
         <img alt="Bond logo" src="../assets/logo.png" class="w5-l w4">
         <div class="ml5-l fr-l tr-l pv3">
