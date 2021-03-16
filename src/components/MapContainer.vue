@@ -19,7 +19,7 @@ const COLOUR_SCALE = [
   // "#560014",
 ];
 
-import filterStore from '../FilterStore.js';
+import { getFiltersFromUrl, memberIsSelected } from '../FilterStore.js';
 import WorldMap from './WorldMap.vue';
 
 export default {
@@ -46,9 +46,14 @@ export default {
       hoveredCountry: null,
       fieldToUse: 'REGION_WB',
       zoomLevel: 0,
-      filters: filterStore.state,
+      filters: getFiltersFromUrl(this.$route),
       colourScaleColours: COLOUR_SCALE,
     };
+  },
+  watch: {
+    $route: function(to){
+      this.filters = getFiltersFromUrl(to);
+    }
   },
   computed: {
     selectedCountryName: function(){
@@ -61,7 +66,7 @@ export default {
       }
     },
     countryValues: function(){
-      var members = this.members.filter((member) => filterStore.memberIsSelected(member));
+      var members = this.members.filter((member) => memberIsSelected(member, this.$route));
       var memberCount = [].concat.apply(
         [],
         members.map((member) => member["countries"])
@@ -75,7 +80,7 @@ export default {
   },
   methods: {
     selectCountry: function(country){
-      filterStore.setCountry(country.ISO_A2);
+      this.$router.push({path: this.$route.path, query: {...this.$route.query, country: country.ISO_A2}});
     },
     countryIsSelected: function(country){
       if(!this.selectedCountry){
@@ -104,7 +109,7 @@ export default {
             (c) => c.properties['ISO_A2'] == country['ISO_A2']
           );
           this.zoomLevel = 2;
-          filterStore.setCountry(country['ISO_A2']);
+          this.selectCountry(country)
         } else {
           countries = this.world.features.filter(
             (c) => (

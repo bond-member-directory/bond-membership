@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import filterStore from "../FilterStore.js";
+import { memberIsSelected, getFiltersFromUrl } from "../FilterStore.js";
 import MemberCard from "./MemberCard.vue";
 import SeparatedList from "./SeparatedList.vue";
 
@@ -45,13 +45,18 @@ export default {
   },
   data: function () {
     return {
-      filters: filterStore.state,
+      filters: getFiltersFromUrl(this.$route),
     };
+  },
+  watch: {
+    $route: function(to){
+      this.filters = getFiltersFromUrl(to);
+    },
   },
   computed: {
     filteredMembers: function () {
       return this.members.filter((member) =>
-        filterStore.memberIsSelected(member)
+        memberIsSelected(member, this.$route)
       );
     },
     countryNames: function () {

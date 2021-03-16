@@ -1,41 +1,17 @@
 <template>
   <PageHeader />
-  <template v-if="filters.memberSelected">
-    <div class="w-100 bg-bond-gray mb0 mt4 f4">
-      <a
-        href="#"
-        @click.prevent="backToAll()"
-        class="w-100 bond-red link underline bond-link b"
-        >&lt; Back to all members</a
-      >
-    </div>
-    <div class="w-100 bg-bond-gray mb0 mt4 cf">
-      <MemberCard
-        :member="members.find((m) => m.id == filters.memberSelected)"
-        :full="true"
-      />
-    </div>
-  </template>
-  <template v-else>
-    <DataFilters />
-    <CardContainer />
-  </template>
+  <router-view/>
 </template>
 
 <script>
-import DataFilters from "./components/DataFilters.vue";
 import PageHeader from "./components/PageHeader.vue";
-import CardContainer from "./components/CardContainer.vue";
-import MemberCard from "./components/MemberCard.vue";
 import world from "./assets/world.json";
 import members from "./assets/bond_members.json";
-import filterStore from "./FilterStore.js";
 
 export default {
   name: "App",
   data: function () {
     return {
-      filters: filterStore.state,
       members: Object.values(members.members).sort(
         (a, b) =>
           a.name.replace(/^(the )/i, "").toLowerCase().localeCompare(b.name.replace(/^(the )/i, "").toLowerCase())
@@ -58,16 +34,8 @@ export default {
       members: this.members,
     };
   },
-  methods: {
-    backToAll: function () {
-      filterStore.clearMemberSelected();
-    },
-  },
   components: {
     PageHeader,
-    CardContainer,
-    MemberCard,
-    DataFilters,
   },
 };
 </script>

@@ -4,7 +4,7 @@
       <div class="w-100 mv3 smol-flexbox-grid">
         <div class="dn">
           <Multiselect
-            v-model="filters.sdg"
+            v-model="sdg"
             :options="sdgSelectValues"
             :searchable="true"
             mode="single"
@@ -15,7 +15,7 @@
           <!-- <a href="#" class="fr bond-red link underline bond-link b f5 mt2" @click.prevent="clearSDG">Clear</a> -->
         </div>
         <div class="">
-          <input :value="filters.search"
+          <input :value="search"
             type="search"
             @keyup.prevent="setSearch"
             placeholder="Search organisations"
@@ -30,7 +30,7 @@
         </div>
         <div class="ma0 pa0 smol-css-grid sdg-grid">
           <label v-for="(sdg, index) in sdgSelectValues" :key="index" class="di" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null">
-            <input v-if="sdgSelected(sdg.value) && filters.sdg.length > 0" @click.prevent="clearSDG" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
+            <input v-if="sdg && sdgSelected(sdg.value) && sdg.length > 0" @click.prevent="clearSDG" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
             <input v-else @click.prevent="setSDG(sdg.value)" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
             <span class="sr-only">{{ sdg.label }}</span>
             <img :src="sdgIcon(sdg.value)" :title="sdg.label" class="o-100-hover grow" :class="{
@@ -42,7 +42,7 @@
       </div>
       <div class="mv3 w-100">
         <Multiselect
-          v-model="filters.country"
+          v-model="country"
           :options="countrySelectValues"
           :searchable="true"
           mode="tags"
@@ -68,10 +68,8 @@
 </template>
 
 <script>
-import filterStore from "../FilterStore.js";
 import Multiselect from "@vueform/multiselect";
 import MapContainer from "./MapContainer.vue";
-import { readonly } from 'vue';
 
 export default {
   name: "DataFilters",
@@ -98,43 +96,79 @@ export default {
       return sdgs;
     },
   },
+  watch: {
+    $route: function(to){
+      this.setFiltersFromUrl(to);
+    },
+  },
   methods: {
+    setFiltersFromUrl: function(route){
+      console.log(route.query);
+      if(Array.isArray(route.query.country)){
+        this.country = route.query.country;
+      } else if(route.query.country){
+        this.country = route.query.country.split(",");
+      } else {
+        this.country = [];
+      }
+      if(Array.isArray(route.query.sdg)){
+        this.sdg = route.query.sdg;
+      } else if(route.query.sdg){
+        this.sdg = route.query.sdg.split(",");
+      } else {
+        this.sdg = [];
+      }
+      if(route.query.search){
+        this.search = route.query.search;
+      } else {
+        this.search = '';
+      }
+    },
     setCountry: function(value){
-      filterStore.setCountry(value);
+      if(Array.isArray(value)){
+        value = value.join(",");
+      }
+      this.$router.push({path: this.$route.path, query: {...this.$route.query, country: value}});
     },
     setSDG: function(value){
-      filterStore.setSDG(value);
+      if(Array.isArray(value)){
+        value = value.join(",");
+      }
+      this.$router.push({path: this.$route.path, query: {...this.$route.query, sdg: value}});
     },
     clearCountry: function(){
-      filterStore.clearCountry();
+      this.$router.push({path: this.$route.path, query: {...this.$route.query, country: ""}});
     },
     clearSDG: function(){
-      filterStore.clearSDG();
+      this.$router.push({path: this.$route.path, query: {...this.$route.query, sdg: ""}});
     },
     clearFilters: function(){
-      filterStore.clearSDG();
-      filterStore.clearCountry();
-      filterStore.clearSearch();
+      this.$router.push({path: this.$route.path, query: {}});
     },
     setSearch: function(event){
-      filterStore.setSearch(event.target.value);
+      this.$router.push({path: this.$route.path, query: {...this.$route.query, search: event.target.value}});
     },
     sdgIcon: function(sdg){
       return require("../assets/images/sdgs/E-WEB-Goal-" + sdg + ".png");
     },
     sdgSelected: function(sdg){
-      if(this.filters.sdg.length==0){
+      if(!this.$route.query.sdg || this.$route.query.sdg.length==0){
         return true;
       }
-      return this.filters.sdg.includes(sdg);
+      return this.$route.query.sdg.includes(sdg);
     }
   }, 
   data() {
     return {
-      filters: readonly(filterStore.state),
+      country: [],
+      sdg: [],
+      search: '',
       hoverSDG: null,
       showMap: true,
     };
+  },
+  mount(){
+    this.setFiltersFromUrl(this.$route);
   },
 };
 </script>

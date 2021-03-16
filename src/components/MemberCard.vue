@@ -89,12 +89,7 @@
         class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
       ></div>
       <h3 class="pa0 ma0 f4">
-        <a
-          href="#"
-          class="link white underline"
-          @click.prevent="selectMember()"
-          >{{ member.name }}</a
-        >
+        <router-link :to="{ name: 'Member', params: { id: member.id }}" class="link white underline">{{ member.name }}</router-link>
       </h3>
     </header>
     <div class="w-100 pa3">
@@ -151,9 +146,7 @@
         </details>
       </div>
       <div class="tr w-100">
-        <a href="#" @click.prevent="selectMember()" class="db f5 bond-red bond-underline">
-          More about this member &gt;
-        </a> 
+        <router-link :to="{ name: 'Member', params: { id: member.id }}" class="db f5 bond-red bond-underline">More about this member &gt;</router-link>
         <a v-if="member.sdgs.length > 0 || member.countries.length > 0" href="#" @click.prevent="selectSDGCountry(member.sdgs, member.countries)" class="db f6 bond-red bond-underline mt2" title="Select members that work on one of the same SDGs or in one of the the same countries.">
           Find similar members
         </a>
@@ -163,7 +156,6 @@
 </template>
 
 <script>
-import filterStore from "../FilterStore.js";
 import WorldMap from "./WorldMap.vue";
 import SeparatedList from "./SeparatedList.vue";
 
@@ -197,19 +189,8 @@ export default {
     sdgIcon: function (sdg) {
       return require("../assets/images/sdgs/E-WEB-Goal-" + sdg + ".png");
     },
-    selectCountry: function (country) {
-      filterStore.setCountry(country);
-    },
-    selectSDG: function (sdg) {
-      filterStore.setSDG(sdg);
-    },
     selectSDGCountry: function (sdg, country) {
-      filterStore.setSDG(sdg);
-      filterStore.setCountry(country);
-      filterStore.clearMemberSelected();
-    },
-    selectMember: function () {
-      filterStore.setMemberSelected(this.member.id);
+      this.$router.push({name: 'Home', query: {...this.$route.query, country: country.join(","), sdg: sdg.join(",")}});
     },
     cleanWebsite: function (url) {
       if (url.startsWith("http") || url.startsWith("//")) {
