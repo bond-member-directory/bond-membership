@@ -4,7 +4,7 @@
       <div class="w-100 mv3 smol-flexbox-grid">
         <div class="dn">
           <Multiselect
-            v-model="sdg"
+            v-model="filters.sdg"
             :options="sdgSelectValues"
             :searchable="true"
             mode="single"
@@ -15,7 +15,7 @@
           <!-- <a href="#" class="fr bond-red link underline bond-link b f5 mt2" @click.prevent="clearSDG">Clear</a> -->
         </div>
         <div class="">
-          <input :value="search"
+          <input :value="filters.search"
             type="search"
             @keyup.prevent="setSearch"
             placeholder="Search organisations"
@@ -30,7 +30,7 @@
         </div>
         <div class="ma0 pa0 smol-css-grid sdg-grid">
           <label v-for="(sdg, index) in sdgSelectValues" :key="index" class="di" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null">
-            <input v-if="sdg && sdgSelected(sdg.value) && sdg.length > 0" @click.prevent="clearSDG" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
+            <input v-if="filters.sdg && sdgSelected(sdg.value) && filters.sdg.length > 0" @click.prevent="clearSDG" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
             <input v-else @click.prevent="setSDG(sdg.value)" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
             <span class="sr-only">{{ sdg.label }}</span>
             <img :src="sdgIcon(sdg.value)" :title="sdg.label" class="o-100-hover grow" :class="{
@@ -42,7 +42,7 @@
       </div>
       <div class="mv3 w-100">
         <Multiselect
-          v-model="country"
+          v-model="filters.country"
           :options="countrySelectValues"
           :searchable="true"
           mode="tags"
@@ -70,6 +70,7 @@
 <script>
 import Multiselect from "@vueform/multiselect";
 import MapContainer from "./MapContainer.vue";
+import { getFiltersFromUrl } from "../FilterStore.js";
 
 export default {
   name: "DataFilters",
@@ -98,32 +99,10 @@ export default {
   },
   watch: {
     $route: function(to){
-      this.setFiltersFromUrl(to);
+      this.filters = getFiltersFromUrl(to);
     },
   },
   methods: {
-    setFiltersFromUrl: function(route){
-      console.log(route.query);
-      if(Array.isArray(route.query.country)){
-        this.country = route.query.country;
-      } else if(route.query.country){
-        this.country = route.query.country.split(",");
-      } else {
-        this.country = [];
-      }
-      if(Array.isArray(route.query.sdg)){
-        this.sdg = route.query.sdg;
-      } else if(route.query.sdg){
-        this.sdg = route.query.sdg.split(",");
-      } else {
-        this.sdg = [];
-      }
-      if(route.query.search){
-        this.search = route.query.search;
-      } else {
-        this.search = '';
-      }
-    },
     setCountry: function(value){
       if(Array.isArray(value)){
         value = value.join(",");
@@ -160,15 +139,10 @@ export default {
   }, 
   data() {
     return {
-      country: [],
-      sdg: [],
-      search: '',
+      filters: getFiltersFromUrl(this.$route),
       hoverSDG: null,
       showMap: true,
     };
-  },
-  mount(){
-    this.setFiltersFromUrl(this.$route);
   },
 };
 </script>
