@@ -38,7 +38,10 @@
       <div class="w-100 mv3">
         <div class="mb2 f4">
           <h3 class="ma0 pa0 f3">Sustainable Development Goals (<abbr title="Sustainable Development Goals">SDGs</abbr>)</h3>
-          <p class="ma0 pa0 h2"><span class="" v-if="hoverSDG">{{ hoverSDG }}</span></p>
+          <p class="ma0 pa0 h2">
+            <span class="" v-if="hoverSDG">{{ hoverSDG }}</span>
+            <span v-else><separated-list :items="selectedSDGs" /></span>
+          </p>
         </div>
         <div class="ma0 pa0 smol-css-grid sdg-grid">
           <label v-for="(sdg, index) in sdgSelectValues" :key="index" class="di" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null">
@@ -70,6 +73,7 @@
 <script>
 import Multiselect from "@vueform/multiselect";
 import MapContainer from "./MapContainer.vue";
+import SeparatedList from "./SeparatedList.vue";
 import { getFiltersFromUrl } from "../FilterStore.js";
 
 export default {
@@ -77,6 +81,7 @@ export default {
   components: {
     Multiselect,
     MapContainer,
+    SeparatedList,
   },
   inject: ["countries", "sdgs"],
   computed: {
@@ -95,6 +100,16 @@ export default {
       }));
       sdgs.sort((a, b) => a.value.localeCompare(b.value));
       return sdgs;
+    },
+    selectedSDGs: function(){
+      var component = this;
+      var selected = this.sdgSelectValues.filter(function(sdg) {
+        return component.sdgSelected(sdg.value);
+      }).map((sdg) => sdg.label);
+      if(selected.length == this.sdgSelectValues.length){
+        return [];
+      }
+      return selected;
     },
   },
   watch: {
