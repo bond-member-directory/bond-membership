@@ -2,7 +2,7 @@
   <div class="fl bw4 border-bond-dark-red f4 bg-bond-grey member-card">
     <header class="w-100 bg-bond-dark-red white ph3 pv3">
       <img
-        v-if="order < 4 && member.logourl"
+        v-if="member.logourl"
         :style="{
           backgroundColor: randomColour(),
         }"
