@@ -27,7 +27,7 @@ export default {
       countries: Object.fromEntries(
         world.features.map((c) => [
           c.properties["ISO_A2"],
-          c.properties["NAME_EN"],
+          c.properties["NAME"],
         ])
       ),
       sdgs: members.sdgs,

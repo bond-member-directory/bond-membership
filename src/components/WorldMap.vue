@@ -161,7 +161,7 @@ export default {
     //   if(!this.selectedCountry){
     //     return false;
     //   } else if(this.zoomLevel > 1){
-    //     return this.selectedCountry["NAME_EN"] == country["NAME_EN"];
+    //     return this.selectedCountry["NAME"] == country["NAME"];
     //   } else {
     //     return this.selectedCountry[this.fieldToUse] == country[this.fieldToUse];
     //   }
@@ -170,7 +170,7 @@ export default {
     //   if(!this.hoveredCountry){
     //     return false;
     //   } else if(this.zoomLevel > 0){
-    //     return this.hoveredCountry["NAME_EN"] == country["NAME_EN"];
+    //     return this.hoveredCountry["NAME"] == country["NAME"];
     //   } else {
     //     return this.hoveredCountry[this.fieldToUse] == country[this.fieldToUse];
     //   }
