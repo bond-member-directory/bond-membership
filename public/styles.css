@@ -34,6 +34,9 @@
 .bg-bond-grey {
     background-color: var(--bond-grey);
 }
+.bg-bond-dark-grey {
+    background-color: var(--bond-dark-grey);
+}
 .bg-bond-white {
     background-color: var(--bond-white);
 }
@@ -155,6 +158,12 @@ strong, h1, h2, h3, h4, .b {
     text-decoration-style: solid;
 }
 
+.bond-link-hover:hover {
+    text-decoration: underline;
+    text-underline-position: under;
+    text-decoration-style: dashed;
+}
+
 .sr-only {
     clip: rect(0 0 0 0); 
     clip-path: inset(50%);
@@ -163,4 +172,20 @@ strong, h1, h2, h3, h4, .b {
     position: absolute;
     white-space: nowrap; 
     width: 1px;
+}
+
+/* Footer styles */
+.l-footer-wrapper .pane-title {
+    border-color: #989482;
+    padding: 0 0 5px 0;
+    text-transform: initial;
+    border-bottom: 0.13em dotted;
+    font-size: 17px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.35;
+    letter-spacing: normal;
+    color: #fff;
+    text-align: left !important;
 }
