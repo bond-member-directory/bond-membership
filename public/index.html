@@ -41,31 +41,12 @@
         <div class="l-constrained">
             <div class="panel-pane pane-custom pane-5 footer__logo-wrapper w-100 fl">
                 <h2 class="pane-title dn">Logo</h2>
-                <div class="footer__logo-img w4"><img
-                        src="https://www.bond.org.uk/sites/all/themes/custom/omega_bond_main/images/logo-white%403x.png">
+                <div class="footer__logo-img w4 pv3">
+                    <a href="https://www.bond.org/"><img
+                        src="https://www.bond.org.uk/sites/all/themes/custom/omega_bond_main/images/logo-white%403x.png"></a>
                 </div>
             </div>
             <div class="l-region l-region--footer-1 w-50-l w-100 fl">
-                <div class="panel-pane pane-custom pane-4">
-                    <script type="application/ld+json">
-            {
-            "@context": "http://schema.org",
-            "@type": "NGO",
-            "name": "Bond",
-            "description": "Bond is the UK network for organisations working in international development.",
-            "logo": "https://www.bond.org.uk/sites/all/themes/omega_bond/logo.svg",
-            "url": "https://www.bond.org.uk/",
-            "sameAs": ["https://twitter.com/bondngo","https://www.linkedin.com/company/bond-uk","https://www.facebook.com/bond.org.uk"],
-            "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Society Building, 8 All Saints Street",
-            "addressLocality": "London",
-            "postalCode": "N1 9RL",
-            "addressCountry": "UK"
-            }
-            }
-            </script>
-                </div>
                 <div class="panel-pane pane-custom pane-6 footer__social w-100 w-50-l fl pr4">
                     <h2 class="pane-title">Contact</h2>
                     <div class="contact">
@@ -147,7 +128,7 @@
                     </div>
                     <div class="company-registration">
                         <p class="selectionShareable f6 bond-mid-grey">Registered Charity No. 1068839 Company Registration No. 03395681
-                            (England and Wales) ©&nbsp;2021</p>
+                            (England and Wales) ©&nbsp;<%= new Date().getFullYear() %></p>
                     </div>
                 </div>
             </div>
