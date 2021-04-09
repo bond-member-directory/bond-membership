@@ -12,10 +12,14 @@
       />
     </header>
     <div class="w-100 cf">
-      <div class="w-100 w-50-ns fr" v-if="member.countries.length > 0" ref="worldmapcontainer">
+      <div
+        class="w-100 w-50-ns fr"
+        v-if="member.countries.length > 0"
+        ref="worldmapcontainer"
+      >
         <world-map
           :countryValues="new Map(member.countries.map((c) => [c, 1]))"
-          :colourScaleColours='["white", "#560014"]'
+          :colourScaleColours="['white', '#560014']"
           :defaultClasses="['fill-bond-mid-grey', 'stroke-bond-mid-grey']"
           :selectedClasses="['fill-bond-dark-red', 'stroke-bond-mid-grey']"
         />
@@ -27,28 +31,12 @@
           >{{ displayWebsite(member.website) }}</a
         >
       </p>
-      <p v-if="member.activities" class="mh0 mt1 mb4 pa0 measure">
-        {{member.activities}}
-      </p>
+      <blockquote v-if="member.activities" class="mh0 mt1 mb4 pa3 bg-bond-grey measure">
+        {{ member.activities }}
+      </blockquote>
       <p v-if="member.yearjoined" class="mh0 mv4 pa0">
         Bond Member since {{ member.yearjoined.slice(0, 4) }}
       </p>
-      <div v-if="member.countries.length > 0" class="mh0 mv3 pa0">
-        <template v-if="member.countries.length < 5">
-          Works in
-          <separated-list :items="member.countries.map((c) => countries[c]).sort()" />
-        </template>
-        <template v-else>
-          <p>Works in {{ member.countries.length }} countries</p>
-          <ul
-            class="list mh0 mb0 mt2 pa0"
-          >
-            <li v-for="country in member.countries.map((c) => countries[c]).sort()" v-bind:key="country" class="mb2">
-              {{ countries[country] }}
-            </li>
-          </ul>
-        </template>
-      </div>
       <div v-if="member.sdgs.length > 0" class="mh0 mv3 pa0">
         Sustainable Development Goals
         <ul class="list mh0 mb0 mt2 pa0 flex flex-wrap">
@@ -62,10 +50,38 @@
         </ul>
       </div>
       <div class="tr w-100">
-        <a v-if="member.sdgs.length > 0 || member.countries.length > 0" href="#" @click.prevent="selectSDGCountry(member.sdgs, member.countries)" class="db f6 bond-red bond-underline mt2" title="Select members that work on one of the same SDGs or in one of the the same countries.">
+        <a
+          v-if="member.sdgs.length > 0 || member.countries.length > 0"
+          href="#"
+          @click.prevent="selectSDGCountry(member.sdgs, member.countries)"
+          class="db f5 bond-red bond-link underline mt2"
+          title="Select members that work on one of the same SDGs or in one of the the same countries."
+        >
           Find similar members
         </a>
       </div>
+    </div>
+    <div v-if="member.countries.length > 0" class="mh0 mv3 pa0">
+      <template v-if="member.countries.length < 5">
+        Works in
+        <separated-list
+          :items="member.countries.map((c) => countries[c]).sort()"
+        />
+      </template>
+      <template v-else>
+        <p>Works in {{ member.countries.length }} countries</p>
+        <ul class="list mh0 mb0 mt2 pa0">
+          <li
+            v-for="country in member.countries
+              .map((c) => countries[c])
+              .sort()"
+            v-bind:key="country"
+            class="mb2"
+          >
+            {{ countries[country] }}
+          </li>
+        </ul>
+      </template>
     </div>
   </div>
 
@@ -89,7 +105,11 @@
         class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
       ></div>
       <h3 class="pa0 ma0 f4">
-        <router-link :to="{ name: 'Member', params: { id: member.id }}" class="link white underline">{{ member.name }}</router-link>
+        <router-link
+          :to="{ name: 'Member', params: { id: member.id } }"
+          class="link white underline"
+          >{{ member.name }}</router-link
+        >
       </h3>
     </header>
     <div class="w-100 pa3">
@@ -103,16 +123,26 @@
       <div v-if="member.countries.length > 0" class="mh0 mv3 pa0">
         <template v-if="member.countries.length < 5">
           Works in
-          <separated-list :items="member.countries.map((c) => countries[c]).sort()" />
+          <separated-list
+            :items="member.countries.map((c) => countries[c]).sort()"
+          />
         </template>
         <details v-else>
-          <summary class="pointer">Works in {{ member.countries.length }} countries</summary>
+          <summary class="pointer">
+            Works in {{ member.countries.length }} countries
+          </summary>
           <ul
             class="list mh0 mb0 mt2 pa0"
             style="max-height: 7rem; overflow-y: auto"
           >
-            <li v-for="country in member.countries.map((c) => countries[c]).sort()" v-bind:key="country" class="mb2">
-              {{country}}
+            <li
+              v-for="country in member.countries
+                .map((c) => countries[c])
+                .sort()"
+              v-bind:key="country"
+              class="mb2"
+            >
+              {{ country }}
             </li>
           </ul>
         </details>
@@ -146,8 +176,18 @@
         </details>
       </div>
       <div class="tr w-100">
-        <router-link :to="{ name: 'Member', params: { id: member.id }}" class="db f5 bond-red bond-underline">More about this member &gt;</router-link>
-        <a v-if="member.sdgs.length > 0 || member.countries.length > 0" href="#" @click.prevent="selectSDGCountry(member.sdgs, member.countries)" class="db f6 bond-red bond-underline mt2" title="Select members that work on one of the same SDGs or in one of the the same countries.">
+        <router-link
+          :to="{ name: 'Member', params: { id: member.id } }"
+          class="db f5 bond-red bond-link underline"
+          >More about this member &gt;</router-link
+        >
+        <a
+          v-if="member.sdgs.length > 0 || member.countries.length > 0"
+          href="#"
+          @click.prevent="selectSDGCountry(member.sdgs, member.countries)"
+          class="db f6 bond-red bond-link underline mt3"
+          title="Select members that work on one of the same SDGs or in one of the the same countries."
+        >
           Find similar members
         </a>
       </div>
@@ -190,7 +230,14 @@ export default {
       return require("../assets/images/sdgs/E-WEB-Goal-" + sdg + ".png");
     },
     selectSDGCountry: function (sdg, country) {
-      this.$router.push({name: 'Home', query: {...this.$route.query, country: country.join(","), sdg: sdg.join(",")}});
+      this.$router.push({
+        name: "Home",
+        query: {
+          ...this.$route.query,
+          country: country.join(","),
+          sdg: sdg.join(","),
+        },
+      });
     },
     cleanWebsite: function (url) {
       if (url.startsWith("http") || url.startsWith("//")) {
