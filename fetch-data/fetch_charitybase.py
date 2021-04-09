@@ -97,6 +97,7 @@ def get_charitybase_data(charity_numbers, iso_lookup):
                     ),
                     "activities": charity.get("activities", ""),
                     "latest_income": charity.get("finances", [{}])[0].get("income"),
+                    "latest_fye": charity.get("finances", [{}])[0].get("financialYear", {}).get("end"),
                 }
             pbar.update(len(chunk))
     return results
