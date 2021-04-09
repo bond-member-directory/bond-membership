@@ -24,21 +24,32 @@
           :selectedClasses="['fill-bond-dark-red', 'stroke-bond-mid-grey']"
         />
       </div>
-      <p v-if="member.website" class="mh0 mt1 mb3 pa0">
+      <p v-if="member.website || ccewUrl" class="mh0 mt1 mb3 pa0">
         <a
+          v-if="member.website"
           :href="cleanWebsite(member.website)"
           class="b bond-red link underline bond-link"
+          target="_blank"
           >{{ displayWebsite(member.website) }}</a
         >
+        <template v-if="member.website && ccewUrl"> | </template>
+        <a
+          v-if="ccewUrl"
+          :href="ccewUrl"
+          class="b bond-red link underline bond-link"
+          target="_blank"
+          >Charity Commission record</a
+        >
       </p>
-      <blockquote v-if="member.activities" class="mh0 mt1 mb4 pa3 bg-bond-grey measure">
+      <blockquote v-if="member.activities" class="mh0 mt4 mb4 pa0 measure">
         {{ member.activities }}
       </blockquote>
-      <p v-if="member.yearjoined" class="mh0 mv4 pa0">
-        Bond Member since {{ member.yearjoined.slice(0, 4) }}
+      <p v-if="member.yearjoined || sizeBand" class="mh0 mv4 pa0">
+        <template v-if="member.yearjoined">Bond Member since {{ member.yearjoined.slice(0, 4) }}. </template> 
+        <template v-if="member.latest_income">Annual income {{ sizeBand }}.</template>
       </p>
       <div v-if="member.sdgs.length > 0" class="mh0 mv3 pa0">
-        Sustainable Development Goals
+        <h3>Sustainable Development Goals</h3>
         <ul class="list mh0 mb0 mt2 pa0 flex flex-wrap">
           <li
             v-for="sdg in member.sdgs"
@@ -224,6 +235,33 @@ export default {
       }
       return 400;
     },
+    sizeBand: function(){
+      if(this.member.latest_income > 100000000){
+        return "over £100m";
+      }
+      if(this.member.latest_income > 10000000){
+        return "£10m - £100m";
+      }
+      if(this.member.latest_income > 1000000){
+        return "£1m - £10m";
+      }
+      if(this.member.latest_income > 100000){
+        return "£100k - £1m";
+      }
+      if(this.member.latest_income > 10000){
+        return "£10k - £100k";
+      }
+      if(this.member.latest_income > 0){
+        return "under £10k";
+      }
+      return null;
+    },
+    ccewUrl: function(){
+      if(this.member.charityCommissionnumber){
+        return `https://register-of-charities.charitycommission.gov.uk/charity-details/?regId=${this.member.charityCommissionnumber}&subId=0`;
+      }
+      return null;
+    }
   },
   methods: {
     sdgIcon: function (sdg) {

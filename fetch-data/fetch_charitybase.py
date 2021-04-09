@@ -33,7 +33,13 @@ query($ids: [ID]){
           id
           name
         },
-        activities
+        activities,
+        finances {
+          income
+          financialYear {
+            end
+          }
+        }
       }
     }
   }
@@ -90,6 +96,7 @@ def get_charitybase_data(charity_numbers, iso_lookup):
                         )
                     ),
                     "activities": charity.get("activities", ""),
+                    "latest_income": charity.get("finances", [{}])[0].get("income"),
                 }
             pbar.update(len(chunk))
     return results
