@@ -1,6 +1,7 @@
 <template>
-  <div ref="worldmap" style="width: 100%;">
+  <figure ref="worldmap" style="width: 100%;">
     <svg :width="width" :height="height">
+      <title>{{ alt }}</title>
       <g class="dark-shadow">
         <map-country
           v-for="p in unSelectedPaths"
@@ -28,7 +29,7 @@
       :y="mouseLocation.y"
       :title="tooltipText"
     />
-  </div>
+  </figure>
 </template>
 
 <script>
@@ -44,6 +45,10 @@ export default {
     center: {
       type: Array,
       default: () => [33.561041, -7.584838],
+    },
+    alt: {
+      type: String,
+      default: () => '',
     },
     scale: {
       type: [Number, String],

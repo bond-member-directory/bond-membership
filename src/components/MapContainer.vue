@@ -4,8 +4,9 @@
     :colourScaleColours='colourScaleColours'
     :selectedCountry="filters.country"
     @select-country="selectCountry($event)"
+    :alt="'Map showing where Bond Members work in the world'"
   />
-  <p class="tr bond-mid-grey">Area of operation data from Charity Commission for England and Wales.</p>
+  <p class="tr bond-dark-grey">Area of operation data from Charity Commission for England and Wales.</p>
 </template>
 
 <script>

@@ -189,3 +189,8 @@ strong, h1, h2, h3, h4, .b {
     color: #fff;
     text-align: left !important;
 }
+
+/* Amendments for accessibility */
+.grow:focus-within {
+  transform: scale(1.05);
+}

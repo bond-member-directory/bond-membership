@@ -43,12 +43,15 @@
             <span v-else><separated-list :items="selectedSDGs" /></span>
           </p>
         </div>
-        <div class="ma0 pa0 smol-css-grid sdg-grid">
-          <label v-for="(sdg, index) in sdgSelectValues" :key="index" class="di" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null">
+        <div class="ma0 pa0 smol-css-grid sdg-grid" role="radiogroup">
+          <label v-for="(sdg, index) in sdgSelectValues" :key="index" class="di o-100-hover grow" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null">
             <input v-if="filters.sdg && sdgSelected(sdg.value) && filters.sdg.length > 0" @click.prevent="clearSDG" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
             <input v-else @click.prevent="setSDG(sdg.value)" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
             <span class="sr-only">{{ sdg.label }}</span>
-            <img :src="sdgIcon(sdg.value)" :title="sdg.label" class="o-100-hover grow" :class="{
+            <img :src="sdgIcon(sdg.value)" :title="sdg.label" tabindex="0" class=""
+              role="radio"
+              :aria-checked="sdgSelected(sdg.value)"
+              :class="{
               'o-100': sdgSelected(sdg.value),
               'o-30': !sdgSelected(sdg.value),
             }" />

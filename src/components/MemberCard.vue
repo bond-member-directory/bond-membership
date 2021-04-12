@@ -1,13 +1,14 @@
 <template>
-  <div class="fl bw4 border-bond-dark-red f4 bg-bond-grey member-card">
-    <header class="w-100 bg-bond-dark-red white ph3 pv3">
+  <div class="fl bw4 border-bond-dark-red f4 bg-bond-white member-card">
+    <header class="w-100 bg-bond-red white ph3 pv3">
       <img
         v-if="member.logourl"
         :style="{
           backgroundColor: randomColour(),
         }"
         :src="member.logourl"
-        class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
+        :alt="'Logo of ' + member.name"
+        class="br-100 fr org-logo border-bond-red bw3 ba w3"
       />
       <div
         v-else
@@ -16,12 +17,12 @@
           width: '80px',
           height: '80px',
         }"
-        class="br-100 fr org-logo border-bond-dark-red bw3 ba w3"
+        class="br-100 fr org-logo border-bond-red bw0 ba w3"
       ></div>
       <h3 class="pa0 ma0 f4">
         <router-link
           :to="{ name: 'Member', params: { id: member.id } }"
-          class="link white underline"
+          class="link white underline-hover bond-link"
           >{{ member.name }}</router-link
         >
       </h3>
@@ -100,7 +101,7 @@
       </a>
       <router-link
         :to="{ name: 'Member', params: { id: member.id } }"
-        class="db f5 bond-red bond-link underline"
+        class="db f6 bond-red bond-link underline"
         >More about this member &gt;</router-link
       >
     </footer>
