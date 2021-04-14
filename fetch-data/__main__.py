@@ -17,7 +17,7 @@ from sdgs import clean_sdgs, SDG_NAMES
 def main(output):
     click.echo("Fetching data from salesforce")
     sf = get_salesforce_instance()
-    members = fetch_data(sf)
+    members = dict(fetch_data(sf))
     click.echo(f"Fetched {len(members):,.0f} records from salesforce")
 
     click.echo("Clean SDG data")

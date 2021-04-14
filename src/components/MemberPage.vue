@@ -43,7 +43,7 @@
         <template v-if="(member.website || ccewUrl) && member.primarycontactemail"> | </template>
         <a
           v-if="member.primarycontactemail"
-          :href="`mailto:${member.primarycontactemail}`"
+          :href="email"
           class="b bond-red link underline bond-link"
           target="_blank"
           >Contact email</a
@@ -161,7 +161,13 @@ export default {
         return `https://register-of-charities.charitycommission.gov.uk/charity-details/?regId=${this.member.charityCommissionnumber}&subId=0`;
       }
       return null;
-    }
+    },
+    email: function(){
+      if(this.member.primarycontactemail){
+        return `mailto:${atob(this.member.primarycontactemail)}`;
+      }
+      return null;
+    },
   },
   methods: {
     sdgIcon: function (sdg) {

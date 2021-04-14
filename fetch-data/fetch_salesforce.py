@@ -1,4 +1,6 @@
+import base64
 import csv
+import html
 
 import requests
 from settings import (
@@ -77,18 +79,23 @@ def fetch_data(sf):
         )
     )
     print(f"{data['totalSize']:,.0f} members found")
-    return {row["Id"]: row for row in data["records"]}
+
+    for row in data["records"]:
+        if row.get("Primary_contact_email__c"):
+            row["Primary_contact_email__c"] = base64.b64encode(
+                html.escape(row["Primary_contact_email__c"]).encode("utf8")
+            ).decode("utf8")
+        yield row["Id"], row
 
 
 if __name__ == "__main__":
 
     sf = get_salesforce_instance()
-    records = fetch_data(sf)
+    records = dict(fetch_data(sf))
 
     with open(SALESFORCE_OUTPUT, "w", encoding="utf8") as a:
         fieldnames = [f.split(".")[-1] for f in FIELDS_TO_FETCH]
         writer = csv.DictWriter(a, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         for row in records.values():
-            row = dict(to_dotted(row))
             writer.writerow({f.split(".")[-1]: row.get(f) for f in FIELDS_TO_FETCH})
