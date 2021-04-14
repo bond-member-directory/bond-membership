@@ -38,3 +38,15 @@ export function memberIsSelected(member, route){
   }
   return toShow.every((v) => v);
 }
+
+export function slugify(text){
+  // https://gist.github.com/codeguy/6684588#gistcomment-3243980
+  return text
+    .toString()                     // Cast to string
+    .toLowerCase()                  // Convert the string to lowercase letters
+    .normalize('NFD')       // The normalize() method returns the Unicode Normalization Form of a given string.
+    .trim()                         // Remove whitespace from both sides of a string
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w-]+/g, '')       // Remove all non-word chars
+    .replace(/--+/g, '-');        // Replace multiple - with single -
+}

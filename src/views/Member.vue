@@ -4,13 +4,14 @@
   </div>
   <div class="w-100 bg-bond-gray mb0 mt4 cf">
     <MemberPage
-      :member="members.find((m) => m.id == $route.params.id)"
+      :member="members.find((m) => slugify(m.name) == $route.params.id)"
     />
   </div>
 </template>
 
 <script>
 import MemberPage from "../components/MemberPage.vue";
+import { slugify } from "../FilterStore.js";
 
 export default {
   name: "Member",
@@ -18,5 +19,8 @@ export default {
   components: {
     MemberPage,
   },
+  methods: {
+    slugify: slugify
+  }
 };
 </script>

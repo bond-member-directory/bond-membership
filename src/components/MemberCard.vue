@@ -21,7 +21,7 @@
       ></div>
       <h3 class="pa0 ma0 f4">
         <router-link
-          :to="{ name: 'Member', params: { id: member.id } }"
+          :to="{ name: 'Member', params: { id: slugify(member.name) } }"
           class="link white underline-hover bond-link"
           >{{ member.name }}</router-link
         >
@@ -100,7 +100,7 @@
         Find similar members
       </a>
       <router-link
-        :to="{ name: 'Member', params: { id: member.id } }"
+        :to="{ name: 'Member', params: { id: slugify(member.name) } }"
         class="db f6 bond-red bond-link underline"
         >More about this member &gt;</router-link
       >
@@ -110,6 +110,7 @@
 
 <script>
 import SeparatedList from "./SeparatedList.vue";
+import { slugify } from "../FilterStore.js";
 
 export default {
   name: "MemberCard",
@@ -164,6 +165,7 @@ export default {
       ];
       return colours[Math.floor(Math.random() * colours.length)];
     },
+    slugify: slugify,
   },
 };
 </script>
