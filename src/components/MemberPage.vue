@@ -24,7 +24,7 @@
           :selectedClasses="['fill-bond-dark-red', 'stroke-bond-mid-grey']"
         />
       </div>
-      <p v-if="member.website || ccewUrl" class="mh0 mt1 mb3 pa0">
+      <p v-if="member.website || ccewUrl || member.primarycontactemail" class="mh0 mt1 mb3 pa0">
         <a
           v-if="member.website"
           :href="cleanWebsite(member.website)"
@@ -39,6 +39,14 @@
           class="b bond-red link underline bond-link"
           target="_blank"
           >Charity Commission record</a
+        >
+        <template v-if="(member.website || ccewUrl) && member.primarycontactemail"> | </template>
+        <a
+          v-if="member.primarycontactemail"
+          :href="`mailto:${member.primarycontactemail}`"
+          class="b bond-red link underline bond-link"
+          target="_blank"
+          >Contact email</a
         >
       </p>
       <blockquote v-if="member.activities" class="mh0 mt4 mb4 pa0 measure">

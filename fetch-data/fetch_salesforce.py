@@ -39,6 +39,7 @@ FIELDS_TO_FETCH = [
     "Current_Membership__r.Life_on_land__c",
     "Current_Membership__r.Peace_justice_and_strong_institutions__c",
     "Current_Membership__r.Partnerships_for_the_goals__c",
+    "Primary_contact_email__c",
 ]
 MEMBERSHIP_STATUS = ["Member", "Renewal", "Lapsed", "Provisional"]
 IDS_TO_EXCLUDE = ["0014000000suyW6AAI"]
