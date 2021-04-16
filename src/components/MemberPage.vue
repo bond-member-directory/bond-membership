@@ -42,11 +42,25 @@
         >
         <template v-if="(member.website || ccewUrl) && member.primarycontactemail"> | </template>
         <a
-          v-if="member.primarycontactemail"
-          :href="email"
+          v-if="member.primarycontactemail && !showEmail"
+          href="#"
+          @click.prevent="showEmail = !showEmail"
+          class="b bond-red link underline bond-link"
+          >Get in touch</a
+        >
+        <a
+          v-if="member.primarycontactemail && showEmail"
+          :href="`mailto:${email}`"
           class="b bond-red link underline bond-link"
           target="_blank"
-          >Contact email</a
+          >{{email}}</a
+        >
+        <a
+          v-if="member.primarycontactemail && showEmail"
+          href="#"
+          @click.prevent="showEmail = !showEmail"
+          class="b bond-red link underline bond-link f6 ml2"
+          >(hide)</a
         >
       </p>
       <blockquote v-if="member.activities" class="mh0 mt4 mb4 pa0 measure">
@@ -118,6 +132,11 @@ export default {
     member: Object,
     order: Number,
   },
+  data() {
+    return {
+      showEmail: false,
+    };
+  },
   components: {
     WorldMap,
     SeparatedList,
@@ -164,7 +183,7 @@ export default {
     },
     email: function(){
       if(this.member.primarycontactemail){
-        return `mailto:${atob(this.member.primarycontactemail)}`;
+        return atob(this.member.primarycontactemail);
       }
       return null;
     },

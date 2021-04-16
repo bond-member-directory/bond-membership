@@ -42,6 +42,7 @@ FIELDS_TO_FETCH = [
     "Current_Membership__r.Peace_justice_and_strong_institutions__c",
     "Current_Membership__r.Partnerships_for_the_goals__c",
     "Primary_contact_email__c",
+    "Hide_email_on_members_directory__c",
 ]
 MEMBERSHIP_STATUS = ["Member", "Renewal", "Lapsed", "Provisional"]
 IDS_TO_EXCLUDE = ["0014000000suyW6AAI"]
@@ -81,10 +82,12 @@ def fetch_data(sf):
     print(f"{data['totalSize']:,.0f} members found")
 
     for row in data["records"]:
-        if row.get("Primary_contact_email__c"):
+        if row.get("Primary_contact_email__c") and not row.get("Hide_email_on_members_directory__c"):
             row["Primary_contact_email__c"] = base64.b64encode(
                 html.escape(row["Primary_contact_email__c"]).encode("utf8")
             ).decode("utf8")
+        else:
+            row["Primary_contact_email__c"] = None
         yield row["Id"], row
 
 
