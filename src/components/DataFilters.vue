@@ -37,14 +37,14 @@
       </div>
       <div class="w-100 mv3">
         <div class="mb2 f4">
-          <h3 class="ma0 pa0 f3">Sustainable Development Goals (<abbr title="Sustainable Development Goals">SDGs</abbr>)</h3>
+          <h3 class="ma0 pa0 f3">Filter by Sustainable Development Goals (<abbr title="Sustainable Development Goals">SDGs</abbr>)</h3>
           <p class="ma0 pa0" style="min-height: 2rem;">
             <span class="" v-if="hoverSDG">{{ hoverSDG }}</span>
             <span v-else><separated-list :items="selectedSDGs" /></span>
           </p>
         </div>
         <div class="ma0 pa0 smol-css-grid sdg-grid" role="radiogroup">
-          <label v-for="(sdg, index) in sdgSelectValues" :key="index" class="di o-100-hover grow" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null">
+          <label v-for="(sdg, index) in sdgSelectValues" :key="index" class="di o-100-hover grow pointer" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null">
             <input v-if="filters.sdg && sdgSelected(sdg.value) && filters.sdg.length > 0" @click.prevent="clearSDG" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
             <input v-else @click.prevent="setSDG(sdg.value)" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
             <span class="sr-only">{{ sdg.label }}</span>

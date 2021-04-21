@@ -66,11 +66,8 @@
       <blockquote v-if="member.activities" class="mh0 mt4 mb4 pa0 measure">
         {{ member.activities }}
       </blockquote>
-      <p v-if="member.yearjoined || sizeBand" class="mh0 mv4 pa0">
-        <template v-if="member.yearjoined">Bond Member since {{ member.yearjoined.slice(0, 4) }}. </template> 
-        <template v-if="sizeBand">
-          Annual income {{ sizeBand }}<template v-if="member.latest_fye"> (<time :datetime="member.latest_fye">{{ member.latest_fye.slice(0,4)}}</time>)</template>.
-        </template>
+      <p v-if="sizeBand" class="mh0 mv4 pa0">
+        Annual income {{ sizeBand }}<template v-if="member.latest_fye"> (<time :datetime="member.latest_fye">{{ member.latest_fye.slice(0,4)}}</time>)</template>.
       </p>
       <div v-if="member.sdgs.length > 0" class="mh0 mv3 pa0">
         <h3>Sustainable Development Goals</h3>
