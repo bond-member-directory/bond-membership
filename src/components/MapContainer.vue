@@ -81,7 +81,12 @@ export default {
   },
   methods: {
     selectCountry: function(country){
-      this.$router.push({path: this.$route.path, query: {...this.$route.query, country: country.ISO_A2}});
+      if(this.filters.country.includes(country.ISO_A2)){
+        var new_countries = this.filters.country.filter((value) => value != country.ISO_A2);
+        this.$router.push({path: this.$route.path, query: {...this.$route.query, country: new_countries}});
+      } else {
+        this.$router.push({path: this.$route.path, query: {...this.$route.query, country: country.ISO_A2}});
+      }
     },
     countryIsSelected: function(country){
       if(!this.selectedCountry){
