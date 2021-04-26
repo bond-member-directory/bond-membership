@@ -20,11 +20,18 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
+## Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+### Include Google Analytics
 
-### Update data from salesforce and charitybase
+Include the environmental variable:
+
+```
+VUE_APP_GOOGLE_ANALYTICS_ID=UA-1234567-1
+```
+
+## Update data from salesforce and charitybase
 
 Include environmental variables:
 
