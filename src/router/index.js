@@ -1,5 +1,6 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHashHistory } from 'vue-router';
+import { trackRouter } from "vue-gtag-next";
+import Home from '../views/Home.vue';
 
 const routes = [
   {
@@ -30,6 +31,8 @@ const router = createRouter({
       return { left: 0, top: 0 }
     }
   },  
-})
+});
+
+trackRouter(router);
 
 export default router

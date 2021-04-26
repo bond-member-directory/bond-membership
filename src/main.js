@@ -9,12 +9,12 @@ const app = createApp(App);
 app.use(router);
 
 const GA_ID = process.env.VUE_APP_GOOGLE_ANALYTICS_ID;
-if(GA_ID){
+if (GA_ID) {
     app.use(VueGtag, {
         property: {
             id: GA_ID,
         }
-    }, router);
+    });
 }
 
 app.mount('#app')
