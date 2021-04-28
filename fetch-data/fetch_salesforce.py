@@ -43,6 +43,8 @@ FIELDS_TO_FETCH = [
     "Current_Membership__r.Partnerships_for_the_goals__c",
     "Primary_contact_email__c",
     "Hide_email_on_members_directory__c",
+    "Remove_from_member_directory__c",
+    "Description",
 ]
 MEMBERSHIP_STATUS = ["Member", "Renewal", "Lapsed", "Provisional"]
 IDS_TO_EXCLUDE = ["0014000000suyW6AAI"]

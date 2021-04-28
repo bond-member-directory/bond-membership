@@ -8,7 +8,7 @@
           backgroundColor: randomColour(),
         }"
         :src="member.logourl"
-        class="br-100 fr org-logo border-bond-dark-red bw0 ba w4"
+        class="fr org-logo border-bond-dark-red bw0 ba w4"
       />
     </header>
     <div class="w-100 cf">
@@ -69,7 +69,7 @@
       <p v-if="sizeBand" class="mh0 mv4 pa0">
         Annual income {{ sizeBand }}<template v-if="member.latest_fye"> (<time :datetime="member.latest_fye">{{ member.latest_fye.slice(0,4)}}</time>)</template>.
       </p>
-      <div v-if="member.sdgs.length > 0" class="mh0 mv3 pa0">
+      <div v-if="member.sdgs && member.sdgs.length > 0" class="mh0 mv3 pa0">
         <h3>Sustainable Development Goals</h3>
         <ul class="list mh0 mb0 mt2 pa0 flex flex-wrap">
           <li
@@ -106,7 +106,7 @@
     </div>
     <footer class="tr w-100">
       <a
-        v-if="member.sdgs.length > 0 || member.countries.length > 0"
+        v-if="(member.sdgs && member.sdgs.length > 0) || member.countries.length > 0"
         href="#"
         @click.prevent="selectSDGCountry(member.sdgs, member.countries)"
         class="db f5 bond-red bond-link underline mt2"

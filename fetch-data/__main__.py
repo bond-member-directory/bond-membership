@@ -33,14 +33,18 @@ def main(output):
     click.echo("Add charity data to member data")
     members_for_site = {}
     for k, m in members.items():
+        if m["Remove_from_member_directory__c"]:
+            continue
         charity = charity_data.get(
             m["Charity_Commission_number__c"],
             {
                 "logourl": None,
-                "activities": None,
+                "activities": m.get("Description"),
                 "countries": [],
             },
         )
+        if "Description" in m:
+            del m["Description"]
         members_for_site[k] = {**charity, **clean_object(m)}
 
     click.echo("Write data to output file")
