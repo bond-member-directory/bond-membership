@@ -8,7 +8,7 @@
         }"
         :src="member.logourl"
         :alt="'Logo of ' + member.name"
-        class="br-100 fr org-logo border-bond-red bw3 ba w3"
+        class="br-100 fr org-logo border-bond-red bw3 ba w3 h3"
       />
       <div
         v-else
@@ -60,7 +60,7 @@
           </ul>
         </details>
       </div>
-      <div v-if="member.sdgs.length > 0" class="mh0 mv3 pa0">
+      <div v-if="member.sdgs && member.sdgs.length > 0" class="mh0 mv3 pa0">
         <template v-if="member.sdgs.length <= 5">
           Sustainable Development Goals
           <ul class="list mh0 mb0 mt2 pa0 flex flex-wrap">
@@ -91,7 +91,7 @@
     </div>
     <footer class="tr w-100 ph3 mb3">
       <a
-        v-if="member.sdgs.length > 0 || member.countries.length > 0"
+        v-if="(member.sdgs && member.sdgs.length > 0) || member.countries.length > 0"
         href="#"
         @click.prevent="selectSDGCountry(member.sdgs, member.countries)"
         class="db f6 bond-red bond-link underline mb3"
@@ -129,6 +129,8 @@ export default {
       return require("../assets/images/sdgs/E-WEB-Goal-" + sdg + ".png");
     },
     selectSDGCountry: function (sdg, country) {
+      if(!sdg){sdg = [];}
+      if(!country){country = [];}
       this.$router.push({
         name: "Home",
         query: {
@@ -175,6 +177,7 @@ export default {
   top: -28px;
   position: relative;
   margin-bottom: -56px;
+  object-fit: contain;
 }
 .member-card {
   display: flex;

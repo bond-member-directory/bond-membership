@@ -31,6 +31,7 @@ def main(output):
     click.echo(f"Fetched data on {len(charity_data):,.0f} charities from CharityBase")
 
     click.echo("Add charity data to member data")
+    members_for_site = {}
     for k, m in members.items():
         charity = charity_data.get(
             m["Charity_Commission_number__c"],
@@ -40,13 +41,13 @@ def main(output):
                 "countries": [],
             },
         )
-        members[k] = {**clean_object(m), **charity}
+        members_for_site[k] = {**charity, **clean_object(m)}
 
     click.echo("Write data to output file")
     with open(output, "w", encoding="utf8") as a:
         json.dump(
             {
-                "members": members,
+                "members": members_for_site,
                 "sdgs": dict(zip(SDG_NAMES.values(), SDG_NAMES.keys())),
             },
             a,

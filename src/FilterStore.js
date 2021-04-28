@@ -27,7 +27,7 @@ export function memberIsSelected(member, route){
     toShow.push(member.countries.filter((c) => filters.country.includes(c)).length > 0);
   }
   if(filters.sdg.length > 0){
-    toShow.push(member.sdgs.filter((c) => filters.sdg.includes(c)).length > 0);
+    toShow.push(member.sdgs && member.sdgs.filter((c) => filters.sdg.includes(c)).length > 0);
   }
   if(filters.search.length > 0){
     toShow.push(
