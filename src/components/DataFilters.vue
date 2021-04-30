@@ -37,7 +37,7 @@
       </div>
       <div class="w-100 mv3">
         <div class="mb2 f4">
-          <h3 class="ma0 pa0 f3">Filter by Sustainable Development Goals (<abbr title="Sustainable Development Goals">SDGs</abbr>)</h3>
+          <h3 class="ma0 pa0 f4">Filter by Sustainable Development Goals (<abbr title="Sustainable Development Goals">SDGs</abbr>)</h3>
           <p class="ma0 pa0" style="min-height: 2rem;">
             <span class="" v-if="hoverSDG">{{ hoverSDG }}</span>
             <span v-else><separated-list :items="selectedSDGs" /></span>
