@@ -27,7 +27,7 @@
         >
       </h3>
     </header>
-    <div class="w-100 ma3 member-card-contents">
+    <div class="ma3 member-card-contents">
       <p v-if="member.website" class="mh0 mt1 mb3 pa0">
         <a
           :href="cleanWebsite(member.website)"
@@ -36,14 +36,12 @@
         >
       </p>
       <div v-if="member.countries.length > 0" class="mh0 mv3 pa0">
-        <template v-if="member.countries.length < 5">
-          Works in
-          <separated-list
-            :items="member.countries.map((c) => countries[c]).sort()"
-          />
-        </template>
-        <details v-else>
-          <summary class="pointer">Works in {{ member.countries.length }} countries</summary>
+        <details>
+          <summary class="pointer" v-if="member.countries.length < 5">Works in
+            <separated-list
+              :items="member.countries.map((c) => countries[c]).sort()"
+            /></summary>
+          <summary class="pointer" v-else>Works in {{ member.countries.length }} countries</summary>
           <ul
             class="list mh0 mb0 mt2 pa0"
             style="max-height: 7rem; overflow-y: auto"
@@ -61,19 +59,7 @@
         </details>
       </div>
       <div v-if="member.sdgs && member.sdgs.length > 0" class="mh0 mv3 pa0">
-        <template v-if="member.sdgs.length <= 5">
-          Sustainable Development Goals
-          <ul class="list mh0 mb0 mt2 pa0 flex flex-wrap">
-            <li
-              v-for="sdg in member.sdgs"
-              v-bind:key="sdg"
-              class="di fl mb1 mr1 w3 h3"
-            >
-              <img :src="sdgIcon(sdg)" :alt="sdgs[sdg]" :title="sdgs[sdg]" />
-            </li>
-          </ul>
-        </template>
-        <details v-else>
+        <details v-bind:open="member.sdgs.length <= 5">
           <summary class="pointer">
             {{ member.sdgs.length }} Sustainable Development Goals
           </summary>
@@ -97,7 +83,7 @@
         class="db f6 bond-red bond-link underline mb3"
         title="Select members that work on one of the same SDGs or in one of the the same countries."
       >
-        Find similar members
+        Find similar members &gt;
       </a>
       <router-link
         :to="{ name: 'Member', params: { id: slugify(member.name) } }"
