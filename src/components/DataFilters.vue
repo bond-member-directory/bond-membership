@@ -36,12 +36,8 @@
         </div>
       </div>
       <div class="w-100 mv3">
-        <div class="mb2 f4">
-          <h3 class="ma0 pa0 f4">Filter by Sustainable Development Goals (<abbr title="Sustainable Development Goals">SDGs</abbr>)</h3>
-          <p class="ma0 pa0" style="min-height: 2rem;">
-            <span class="" v-if="hoverSDG">{{ hoverSDG }}</span>
-            <span v-else><separated-list :items="selectedSDGs" /></span>
-          </p>
+        <div class="mb2">
+          <h3 class="ma0 pa0 f5 normal">Filter by Sustainable Development Goals (<abbr title="Sustainable Development Goals">SDGs</abbr>)</h3>
         </div>
         <div class="ma0 pa0 smol-css-grid sdg-grid" role="radiogroup">
           <label v-for="(sdg, index) in sdgSelectValues" :key="index" class="di o-100-hover grow pointer" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null">
@@ -57,6 +53,10 @@
             }" />
           </label>
         </div>
+        <p class="ma0 pa0" style="min-height: 2rem;">
+          <span class="" v-if="hoverSDG">{{ hoverSDG }}</span>
+          <span v-else><separated-list :items="selectedSDGs" /></span>
+        </p>
       </div>
       <div class="mv3 w-100 tr">
         <a href="#" class="bond-red link underline bond-link b f5 ml3" @click.prevent="clearFilters">Clear filters</a>
