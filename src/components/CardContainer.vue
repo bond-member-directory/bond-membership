@@ -1,13 +1,18 @@
 <template>
   <div class="w-100 bg-bond-gray f4" style="grid-area: cardheader">
-    <template v-if="filteredMembers.length != members.length">
-      Found {{ filteredMembers.length }} of {{ members.length }} members.
-      Page {{ page + 1 }} of {{ last_page }}.
-    </template>
-    <template v-else>
-      Found {{ members.length }} members.
-      Page {{ page + 1 }} of {{ last_page }}.
-    </template>
+    <p>
+      <template v-if="filteredMembers.length != members.length">
+        Found {{ filteredMembers.length }} of {{ members.length }} members.
+      </template>
+      <template v-else>
+        Found {{ members.length }} members.
+      </template>
+      <template v-if="last_page == 1">
+      </template>
+      <template v-else>
+        Page {{ page + 1 }} of {{ last_page }}.
+      </template>
+    </p>
     <p v-if="filters.country.length > 0 && filters.sdg.length > 0">
       Showing members working on SDG
       <separated-list :items="sdgNames" separator=" or " /> and working in
@@ -39,8 +44,8 @@
       <a v-if="page > 0" v-on:click.prevent="page = page - 1" href="#" class="bond-red link underline bond-link b f4 mr3">Previous page</a>
     </div>
     <div class="fr">
-      <a v-if="page < last_page" v-on:click.prevent="page = page + 1" href="#" class="bond-red link underline bond-link b f4 mr3">Next page</a>
-      <a v-if="page < last_page" v-on:click.prevent="page = last_page - 1" href="#" class="bond-red link underline bond-link b f4 mr3">Last page</a>
+      <a v-if="(page < (last_page - 1)) && (last_page > 1)" v-on:click.prevent="page = page + 1" href="#" class="bond-red link underline bond-link b f4 mr3">Next page</a>
+      <a v-if="(page < (last_page - 1)) && (last_page > 1)" v-on:click.prevent="page = last_page - 1" href="#" class="bond-red link underline bond-link b f4 mr3">Last page</a>
     </div>
   </div>
 </template>
