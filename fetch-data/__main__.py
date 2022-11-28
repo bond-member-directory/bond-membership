@@ -1,19 +1,15 @@
 import json
 
 import click
-from fetch_charitybase import (
-    clean_object,
-    get_charity_numbers,
-    get_charitybase_data,
-    get_iso_lookup,
-)
+from fetch_charitybase import get_charity_numbers, get_charitybase_data, get_iso_lookup
 from fetch_salesforce import fetch_data, get_salesforce_instance
+from sdgs import SDG_NAMES, clean_sdgs
 from settings import FINAL_OUTPUT
-from sdgs import clean_sdgs, SDG_NAMES
+from utils import clean_object
 
 
 @click.command()
-@click.option('--output', default=FINAL_OUTPUT, show_default=True)
+@click.option("--output", default=FINAL_OUTPUT, show_default=True)
 def main(output):
     click.echo("Fetching data from salesforce")
     sf = get_salesforce_instance()
@@ -26,7 +22,9 @@ def main(output):
     iso_lookup = get_iso_lookup()
     click.echo("Extract charity numbers to fetch")
     charity_numbers = get_charity_numbers(members)
-    click.echo(f"Fetching data on {len(charity_numbers):,.0f} charities from CharityBase")
+    click.echo(
+        f"Fetching data on {len(charity_numbers):,.0f} charities from CharityBase"
+    )
     charity_data = get_charitybase_data(charity_numbers, iso_lookup)
     click.echo(f"Fetched data on {len(charity_data):,.0f} charities from CharityBase")
 
@@ -59,5 +57,6 @@ def main(output):
         )
         click.echo(f"Data written to `{output}`")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

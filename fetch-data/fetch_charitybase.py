@@ -1,18 +1,13 @@
 import csv
-import io
-import json
 
 import requests
 from settings import (
     CHARITYBASE_API_KEY,
     CHARITYBASE_URL,
-    FINAL_OUTPUT,
     GSS_LOOKUP_CSV,
     SALESFORCE_OUTPUT,
-    SDGS_INPUT,
 )
 from tqdm import tqdm
-from utils import clean_object
 
 CHARITYBASE_HEADERS = {
     "Authorization": f"Apikey {CHARITYBASE_API_KEY}",
@@ -100,35 +95,13 @@ def get_charitybase_data(charity_numbers, iso_lookup):
                     "latest_fye": None,
                 }
                 if charity.get("finances", []):
-                    results[charity["id"]]["latest_income"] = charity.get("finances", [{}])[0].get("income")
-                    results[charity["id"]]["latest_fye"] = charity.get("finances", [{}])[0].get("financialYear", {}).get("end")
+                    results[charity["id"]]["latest_income"] = charity.get(
+                        "finances", [{}]
+                    )[0].get("income")
+                    results[charity["id"]]["latest_fye"] = (
+                        charity.get("finances", [{}])[0]
+                        .get("financialYear", {})
+                        .get("end")
+                    )
             pbar.update(len(chunk))
     return results
-
-
-if __name__ == "__main__":
-    sdgs = fetch_sdgs()
-    iso_lookup = get_iso_lookup()
-    members = get_member_data()
-    charity_numbers = get_charity_numbers(members)
-    charity_data = get_charitybase_data(charity_numbers, iso_lookup)
-
-    for k, m in members.items():
-        charity = charity_data.get(
-            m["Charity_Commission_number__c"],
-            {
-                "logourl": None,
-                "countries": [],
-            },
-        )
-        members[k] = {**clean_object(m), **charity, "sdgs": sdgs.get(m["Name"], [])}
-
-    with open(FINAL_OUTPUT, "w", encoding="utf8") as a:
-        json.dump(
-            {
-                "members": members,
-                "sdgs": dict(zip(SDG_NAMES.values(), SDG_NAMES.keys())),
-            },
-            a,
-            indent=4,
-        )
