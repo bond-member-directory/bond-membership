@@ -117,8 +117,13 @@
 .multiselect.bg-bond-grey div.multiselect-search > input {
     background-color: var(--bond-grey);
 }
-.multiselect-tag {
-    font-size: 2em;
+#multiselect .multiselect-tag {
+    font-size: 1.1rem;
+    background-color: var(--bond-darkest-red); 
+    color: var(--bond-white);
+}
+#multiselect .multiselect-tag > i::before {
+    color: var(--bond-white);
 }
 
 /* grids */
