@@ -19,6 +19,11 @@
     --bond-font: 'DINNextRounded', Arial, Helvetica, sans-serif;
 }
 
+body {
+    font-family: var(--bond-font);
+    font-weight: 400;
+    line-height: 1.5;
+}
 .bond-font {
     font-family: var(--bond-font);
 }
@@ -179,23 +184,31 @@ strong, h1, h2, h3, h4, .b {
     width: 1px;
 }
 
-/* Footer styles */
-.l-footer-wrapper .pane-title {
-    border-color: #989482;
-    padding: 0 0 5px 0;
-    text-transform: initial;
-    border-bottom: 0.13em dotted;
-    font-size: 17px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.35;
-    letter-spacing: normal;
-    color: #fff;
-    text-align: left !important;
-}
-
 /* Amendments for accessibility */
 .grow:focus-within {
   transform: scale(1.05);
+}
+
+/* Header and footer */
+header, footer {
+    font-weight: bold;
+}
+header .btn, 
+footer .btn {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+header h1, header h2, header h3, header h4, header h5, header h6,
+footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
+    margin: 0;
+}
+
+.site-navigation .menu > li a {
+    cursor: pointer;
 }

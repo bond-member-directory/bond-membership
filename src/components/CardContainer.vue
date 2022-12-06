@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 bg-bond-gray f4" style="grid-area: cardheader">
+  <div class="w-100 bg-bond-gray f4 cf" style="grid-area: cardheader">
     <p>
       <template v-if="filteredMembers.length != members.length">
         Found {{ filteredMembers.length }} of {{ members.length }} members.
@@ -38,7 +38,7 @@
       :member="member"
     />
   </div>
-  <div class="w-100">
+  <div class="w-100 cf">
     <div class="fl">
       <a v-if="page > 0" v-on:click.prevent="page = 0" href="#" class="bond-red link underline bond-link b f4 mr3">First page</a>
       <a v-if="page > 0" v-on:click.prevent="page = page - 1" href="#" class="bond-red link underline bond-link b f4 mr3">Previous page</a>

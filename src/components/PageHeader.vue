@@ -1,9 +1,8 @@
 <template>
   <header class="w-100 bg-white mb3 cf">
-    <div class="w-100 f4">
-        <img alt="Bond logo" src="../assets/logo.png" class="w5-l w4">
-        <div class="ml5-l fr-l tr-l pv3">
-          <h1 class="bond-mid-grey header-text normal f1-l f2 mt0 mb3">Members Directory</h1>
+    <div class="w-100 f4 flex-l">
+        <h1 class="bond-mid-grey header-text normal f1 f2 mt0 mb3 w100 w-50-l">Members Directory</h1>
+        <div class="ml-auto-l pv3 normal">
           <p class="measure f5 ma0 pa0 lh-copy tl">
             Browse the international development organisations that are members of 
             <a href="https://www.bond.org.uk/about-us" target="_blank" class="bond-red link underline bond-link b">the Bond network</a>, 

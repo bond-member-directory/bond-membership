@@ -3,6 +3,7 @@ import json
 import click
 from fetch_charitybase import get_charity_numbers, get_charitybase_data, get_iso_lookup
 from fetch_salesforce import fetch_data, get_salesforce_instance
+from fetch_styles import fetch_header_and_footer
 from sdgs import SDG_NAMES, clean_sdgs
 from settings import FINAL_OUTPUT
 from utils import clean_object
@@ -56,6 +57,9 @@ def main(output):
             indent=4,
         )
         click.echo(f"Data written to `{output}`")
+
+    click.echo("Fetch header and footer")
+    fetch_header_and_footer()
 
 
 if __name__ == "__main__":

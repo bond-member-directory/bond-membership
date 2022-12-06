@@ -1,10 +1,12 @@
 <template>
-  <PageHeader />
+  <!-- <PageHeader /> -->
   <router-view/>
+  <PageFooter />
 </template>
 
 <script>
-import PageHeader from "./components/PageHeader.vue";
+// import PageHeader from "./components/PageHeader.vue";
+import PageFooter from "./components/PageFooter.vue";
 import world from "./assets/world.json";
 import members from "./assets/bond_members.json";
 
@@ -35,7 +37,8 @@ export default {
     };
   },
   components: {
-    PageHeader,
+    // PageHeader,
+    PageFooter,
   },
 };
 </script>
