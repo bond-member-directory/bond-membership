@@ -4,7 +4,7 @@ import requests
 from settings import BOND_ASSET_OUTPUT, BOND_FOOTER, BOND_HEADER, BOND_STYLESHEET
 
 DESCRIPTION = """
-<div class="fr">
+<div class="fr {classes} normal">
     <p class="measure f5 ma0 pa0 lh-copy tl">
         Browse the international development organisations that are members of 
         <a href="https://www.bond.org.uk/about-us" target="_blank" class="bond-red link underline bond-link b">the Bond network</a>,
@@ -16,11 +16,21 @@ DESCRIPTION = """
     </p>
 </div>
 """
+HEADING = """
+<h1 class="bond-mid-grey header-text b f1 f2 mt0 mb3 w100 w-50-l">
+    Members Directory
+</h1>
+"""
 
 
 def fetch_header_and_footer():
-    header = requests.get(BOND_HEADER).text
-    footer = requests.get(BOND_FOOTER).text
+    r = requests.get(BOND_HEADER)
+    r.raise_for_status()
+    header = r.text
+
+    r = requests.get(BOND_FOOTER)
+    r.raise_for_status()
+    footer = r.text
 
     with open(os.path.join(BOND_ASSET_OUTPUT, "template/index.html"), "r") as f:
         template = f.read()
@@ -32,10 +42,12 @@ def fetch_header_and_footer():
             .replace("<%= BOND_CSS %>", BOND_STYLESHEET)
             .replace(
                 '<div class="site-branding">',
-                '<div class="site-branding">' + DESCRIPTION,
+                '<div class="site-branding">' + DESCRIPTION.format(classes="dn db-l"),
             )
             .replace(
                 "</div><!-- .site-branding -->",
-                '<h1 class="bond-mid-grey header-text normal f1 f2 mt0 mb3 w100 w-50-l" data-v-ad84f3a8="">Members Directory</h1></div><!-- .site-branding -->',
+                HEADING
+                + DESCRIPTION.format(classes="db dn-l")
+                + "</div><!-- .site-branding -->",
             )
         )
