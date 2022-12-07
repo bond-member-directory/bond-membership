@@ -14,8 +14,18 @@
         }
 
         @font-face {
+            font-family: DINNextRoundedLTProLight;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Light.otf") format("opentype");
+        }
+
+        @font-face {
             font-family: DINNextRounded;
             font-weight: bold;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Regular.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: DINNextRoundedLTProRegular;
             src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Regular.otf") format("opentype");
         }
 
@@ -24,11 +34,16 @@
             font-weight: 800;
             src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Bold.otf") format("opentype");
         }
+
+        @font-face {
+            font-family: DINNextRoundedLTProBold;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Bold.otf") format("opentype");
+        }
     </style>
     <link rel="stylesheet" href="<%= BASE_URL %>styles.css" />
     <link rel="stylesheet" href="https://www.bond.org.uk/wp-content/themes/bond/style-salesforce.css" />
     <title>Bond | The international development network</title>
-	<script>function jQuery(){ return null; }</script>
+    <script src="https://www.bond.org.uk/wp-content/themes/bond/script-salesforce.js"></script>
 </head>
 
 <body>
@@ -40,38 +55,10 @@
 <header id="masthead" class="site-header">
 	<div class="container">
 		<div class="site-branding">
-<div class="fr dn db-l normal">
-    <p class="measure f5 ma0 pa0 lh-copy tl">
-        Browse the international development organisations that are members of 
-        <a href="https://www.bond.org.uk/about-us" target="_blank" class="bond-red link underline bond-link b">the Bond network</a>,
-        and see which countries they work in and which Sustainable Development Goals they focus on.
-    </p>
-    <p class="measure f5 ma0 pa0 lh-copy tl">
-        If you have any feedback on this directory, please 
-        <a href="https://www.bond.org.uk/contact-us" target="_blank" class="bond-red link underline bond-link b">get in touch</a>.
-    </p>
-</div>
-
 			<a href="https://www.bond.org.uk">
 				<img src="https://www.bond.org.uk/wp-content/themes/bond/img/logo.svg" alt="Bond logo">
 			</a>
-		
-<h1 class="bond-mid-grey header-text b f1 f2 mt0 mb3 w100 w-50-l">
-    Members Directory
-</h1>
-
-<div class="fr db dn-l normal">
-    <p class="measure f5 ma0 pa0 lh-copy tl">
-        Browse the international development organisations that are members of 
-        <a href="https://www.bond.org.uk/about-us" target="_blank" class="bond-red link underline bond-link b">the Bond network</a>,
-        and see which countries they work in and which Sustainable Development Goals they focus on.
-    </p>
-    <p class="measure f5 ma0 pa0 lh-copy tl">
-        If you have any feedback on this directory, please 
-        <a href="https://www.bond.org.uk/contact-us" target="_blank" class="bond-red link underline bond-link b">get in touch</a>.
-    </p>
-</div>
-</div><!-- .site-branding -->
+		</div><!-- .site-branding -->
 
 		<nav id="site-navigation" class="site-navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle menu">
@@ -132,7 +119,7 @@
 	<li id="menu-item-12751" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12751"><a href="https://www.bond.org.uk/about-us/contact-us/"><i class="zmdi zmdi-chevron-right"></i>Contact us</a></li>
 </ul>
 </li>
-<li id="menu-item-67" class="join menu-item menu-item-type-custom menu-item-object-custom menu-item-67"><a href="/join"><i class="zmdi zmdi-chevron-right"></i>Join Bond</a></li>
+<li id="menu-item-67" class="join menu-item menu-item-type-custom menu-item-object-custom menu-item-67"><a href="https://www.bond.org.uk/join/"><i class="zmdi zmdi-chevron-right"></i>Join Bond</a></li>
 </ul>			
 		</nav><!-- #site-navigation -->
 	</div>
@@ -241,12 +228,9 @@
 			<div class="row">
 				<div class="col-md-3">
 					<h3>Contact</h3>
-					<p>Bond, Society Building,<br />
-
-8 All Saints Street,<br />
-
-London,<br />
-
+					<p>Bond, Society Building,<br />
+8 All Saints Street,<br />
+London,<br />
 N1 9RL
 					
 					<br>Tel: <a href="tel:4402078378344">+44 (0)20 7837 8344</a></p>

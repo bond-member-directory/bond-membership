@@ -37,4 +37,5 @@ FINAL_OUTPUT = os.path.join(SCRIPT_DIR, "..", "src", "assets", "bond_members.jso
 BOND_HEADER = "https://www.bond.org.uk/site-header/"
 BOND_FOOTER = "https://www.bond.org.uk/site-footer/"
 BOND_STYLESHEET = "https://www.bond.org.uk/wp-content/themes/bond/style-salesforce.css"
+BOND_SCRIPT = "https://www.bond.org.uk/wp-content/themes/bond/script-salesforce.js"
 BOND_ASSET_OUTPUT = os.path.join(SCRIPT_DIR, "..", "public")

@@ -1,7 +1,13 @@
 import os
 
 import requests
-from settings import BOND_ASSET_OUTPUT, BOND_FOOTER, BOND_HEADER, BOND_STYLESHEET
+from settings import (
+    BOND_ASSET_OUTPUT,
+    BOND_FOOTER,
+    BOND_HEADER,
+    BOND_SCRIPT,
+    BOND_STYLESHEET,
+)
 
 DESCRIPTION = """
 <div class="fr {classes} normal">
@@ -40,14 +46,16 @@ def fetch_header_and_footer():
             template.replace("<%= HEADER %>", header)
             .replace("<%= FOOTER %>", footer)
             .replace("<%= BOND_CSS %>", BOND_STYLESHEET)
-            .replace(
-                '<div class="site-branding">',
-                '<div class="site-branding">' + DESCRIPTION.format(classes="dn db-l"),
-            )
-            .replace(
-                "</div><!-- .site-branding -->",
-                HEADING
-                + DESCRIPTION.format(classes="db dn-l")
-                + "</div><!-- .site-branding -->",
-            )
+            .replace("<%= BOND_SCRIPT %>", BOND_SCRIPT)
+            .replace('href="/join"', 'href="https://www.bond.org.uk/join/"')
+            # .replace(
+            #     '<div class="site-branding">',
+            #     '<div class="site-branding">' + DESCRIPTION.format(classes="dn db-l"),
+            # )
+            # .replace(
+            #     "</div><!-- .site-branding -->",
+            #     HEADING
+            #     + DESCRIPTION.format(classes="db dn-l")
+            #     + "</div><!-- .site-branding -->",
+            # )
         )

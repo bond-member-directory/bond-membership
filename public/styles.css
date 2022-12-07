@@ -209,6 +209,19 @@ footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
     margin: 0;
 }
 
-.site-navigation .menu > li a {
+nav#site-navigation .menu > li a {
+    cursor: pointer;
+}
+
+.menu-toggle {  
+    box-shadow: none;
+    border: 1px solid;
+    border-color: #560014;
+    border-radius: 3px;
+    color: #FFFFFF;
+    line-height: 1.3;
+    padding: 10px 20px;
+    transition: 0.3s border-color;
+    transition: 0.3s background-color;
     cursor: pointer;
 }

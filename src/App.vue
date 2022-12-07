@@ -1,11 +1,11 @@
 <template>
-  <!-- <PageHeader /> -->
-  <router-view/>
+  <PageHeader />
+  <router-view />
   <PageFooter />
 </template>
 
 <script>
-// import PageHeader from "./components/PageHeader.vue";
+import PageHeader from "./components/PageHeader.vue";
 import PageFooter from "./components/PageFooter.vue";
 import world from "./assets/world.json";
 import members from "./assets/bond_members.json";
@@ -37,7 +37,7 @@ export default {
     };
   },
   components: {
-    // PageHeader,
+    PageHeader,
     PageFooter,
   },
 };
@@ -52,6 +52,7 @@ export default {
     "cardheader cardheader"
     "cards cards";
 }
+
 .grid-container.with-map {
   display: grid;
   grid-template-columns: 50% auto;
@@ -61,6 +62,7 @@ export default {
     "cardheader cardheader"
     "cards cards";
 }
+
 @media screen and (min-width:60em) {
   .grid-container.with-map {
     grid-template-areas:

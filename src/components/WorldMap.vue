@@ -128,7 +128,7 @@ export default {
         style.stroke = '#D50032';
       }
       if(this.selectedCountry.includes(country["ISO_A2"])){
-        style.stroke = 'yellow';
+        style.stroke = '#D50032';
         style.strokeWidth = 3;
       }
       return style;
