@@ -12,7 +12,6 @@
             placeholder="Filter by Sustainable Development Goal"
             class="w-100 bg-bond-grey"
           />
-          <!-- <a href="#" class="fr bond-red link underline bond-link b f5 mt2" @click.prevent="clearSDG">Clear</a> -->
         </div>
         <div class="">
           <input :value="filters.search"
@@ -64,7 +63,6 @@
           <template v-if="showMap">Hide map</template>
           <template v-else>Show map</template>
         </a>
-        <!-- <a href="#" class="fr bond-red link underline bond-link b f5 mt2" @click.prevent="clearCountry">Clear</a> -->
       </div>
     </div>
     <div class="w-100 w-60-l fl cf pl0 pl3-l" v-if="showMap">

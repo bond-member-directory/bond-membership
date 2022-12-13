@@ -10,7 +10,7 @@
         :alt="'Logo of ' + member.name"
         class="br-100 fr org-logo border-bond-red bw3 ba w3 h3"
       />
-      <div
+      <!--<div
         v-else
         :style="{
           backgroundColor: randomColour(),
@@ -18,7 +18,7 @@
           height: '80px',
         }"
         class="br-100 fr org-logo border-bond-red bw0 ba w3"
-      ></div>
+      ></div>-->
       <h3 class="pa0 ma0 f4">
         <router-link
           :to="{ name: 'Member', params: { id: slugify(member.name) } }"
