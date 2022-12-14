@@ -30,6 +30,9 @@ body {
 .bg-bond-red {
     background-color: var(--bond-red);
 }
+.bg-bond-medium-red {
+    background-color: var(--bond-medium-red);
+}
 .bg-bond-dark-red {
     background-color: var(--bond-dark-red);
 }
@@ -48,6 +51,9 @@ body {
 .border-bond-red {
     border-color: var(--bond-red);
 }
+.border-bond-medium-red {
+    border-color: var(--bond-medium-red);
+}
 .border-bond-dark-red {
     border-color: var(--bond-dark-red);
 }
@@ -62,6 +68,9 @@ body {
 }
 .fill-bond-red {
     fill: var(--bond-red);
+}
+.fill-bond-medium-red {
+    fill: var(--bond-medium-red);
 }
 .fill-bond-white {
     fill: var(--bond-white);
@@ -81,6 +90,9 @@ body {
 .stroke-bond-red {
     stroke: var(--bond-red);
 }
+.stroke-bond-medium-red {
+    stroke: var(--bond-medium-red);
+}
 .stroke-bond-white {
     stroke: var(--bond-white);
 }
@@ -98,6 +110,9 @@ body {
 }
 .bond-red {
     color: var(--bond-red);
+}
+.bond-medium-red {
+    color: var(--bond-medium-red);
 }
 .bond-dark-red {
     color: var(--bond-dark-red);

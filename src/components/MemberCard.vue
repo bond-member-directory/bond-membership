@@ -3,22 +3,10 @@
     <header class="w-100 bg-bond-red white ph3 pv3">
       <img
         v-if="member.logourl"
-        :style="{
-          backgroundColor: randomColour(),
-        }"
         :src="member.logourl"
         :alt="'Logo of ' + member.name"
-        class="br-100 fr org-logo border-bond-red bw3 ba w3 h3"
+        class="br-100 fr org-logo bg-bond-dark-red border-bond-medium-red bw3 ba w3 h3"
       />
-      <!--<div
-        v-else
-        :style="{
-          backgroundColor: randomColour(),
-          width: '80px',
-          height: '80px',
-        }"
-        class="br-100 fr org-logo border-bond-red bw0 ba w3"
-      ></div>-->
       <h3 class="pa0 ma0 f4">
         <router-link
           :to="{ name: 'Member', params: { id: slugify(member.name) } }"
