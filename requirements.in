@@ -4,3 +4,4 @@ tqdm
 isort
 black
 click
+requests

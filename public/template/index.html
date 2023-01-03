@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="shortcut icon" href="<%= BASE_URL %>images/favicon.png">
+    <style>
+        @font-face {
+            font-family: DINNextRounded;
+            font-weight: normal;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Light.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: DINNextRoundedLTProLight;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Light.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: DINNextRounded;
+            font-weight: bold;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Regular.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: DINNextRoundedLTProRegular;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Regular.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: DINNextRounded;
+            font-weight: 800;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Bold.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: DINNextRoundedLTProBold;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Bold.otf") format("opentype");
+        }
+    </style>
+    <link rel="stylesheet" href="<%= BASE_URL %>styles.css" />
+    <link rel="stylesheet" href="<%= BOND_CSS %>" />
+    <title>Bond | The international development network</title>
+    <script src="<%= BOND_SCRIPT %>"></script>
+</head>
+
+<body>
+    <noscript>
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+                Please enable it to continue.</strong>
+    </noscript>
+    <%= HEADER %>
+    <div id="app" class="container bond-font"></div>
+    <!-- built files will be auto injected -->
+    <%= FOOTER %>
+</body>
+
+</html>

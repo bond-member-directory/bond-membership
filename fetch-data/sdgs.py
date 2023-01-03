@@ -1,4 +1,3 @@
-
 SDG_NAMES = {
     "No poverty": "01",
     "Zero hunger": "02",
@@ -19,11 +18,11 @@ SDG_NAMES = {
     "Partnerships for the goals": "17",
 }
 
+
 def clean_sdgs(members):
 
     sdg_fields = {
-        k.replace(" ", "_").replace(",", "") + "__c": v
-        for k, v in SDG_NAMES.items()
+        k.replace(" ", "_").replace(",", "") + "__c": v for k, v in SDG_NAMES.items()
     }
 
     for member_id, row in members.items():

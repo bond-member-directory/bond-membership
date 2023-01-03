@@ -5,11 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="shortcut icon" href="<%= BASE_URL %>images/favicon.png">
     <style>
         @font-face {
             font-family: DINNextRounded;
             font-weight: normal;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Light.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: DINNextRoundedLTProLight;
             src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Light.otf") format("opentype");
         }
 
@@ -20,13 +25,25 @@
         }
 
         @font-face {
+            font-family: DINNextRoundedLTProRegular;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Regular.otf") format("opentype");
+        }
+
+        @font-face {
             font-family: DINNextRounded;
             font-weight: 800;
             src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Bold.otf") format("opentype");
         }
+
+        @font-face {
+            font-family: DINNextRoundedLTProBold;
+            src: url("<%= BASE_URL %>fonts/DINNextRoundedLTPro-Bold.otf") format("opentype");
+        }
     </style>
     <link rel="stylesheet" href="<%= BASE_URL %>styles.css" />
+    <link rel="stylesheet" href="https://www.bond.org.uk/wp-content/themes/bond/style-salesforce.css" />
     <title>Bond | The international development network</title>
+    <script src="https://www.bond.org.uk/wp-content/themes/bond/script-salesforce.js"></script>
 </head>
 
 <body>
@@ -34,106 +51,247 @@
         <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
                 Please enable it to continue.</strong>
     </noscript>
-    <div id="app" class="pa3 ph4-ns ma0 bond-font"></div>
+    
+<header id="masthead" class="site-header">
+	<div class="container">
+		<div class="site-branding">
+			<a href="https://www.bond.org.uk">
+				<img src="https://www.bond.org.uk/wp-content/themes/bond/img/logo.svg" alt="Bond logo">
+			</a>
+		</div><!-- .site-branding -->
+
+		<nav id="site-navigation" class="site-navigation">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle menu">
+			</button>
+
+			<ul id="primary-menu" class="menu"><li id="menu-item-11632" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-11632"><a><i class="zmdi zmdi-chevron-right"></i>News &#038; Views</a>
+<ul class="sub-menu">
+	<li id="menu-item-12355" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12355"><a href="https://www.bond.org.uk/news/"><i class="zmdi zmdi-chevron-right"></i>All News &#038; Views</a></li>
+	<li id="menu-item-8789" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8789"><a href="https://www.bond.org.uk/subscribe/"><i class="zmdi zmdi-chevron-right"></i>Subscribe</a></li>
+	<li id="menu-item-8790" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8790"><a href="https://www.bond.org.uk/news/podcast/"><i class="zmdi zmdi-chevron-right"></i>Podcast</a></li>
+	<li id="menu-item-9373" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9373"><a href="https://www.bond.org.uk/news/media-centre/"><i class="zmdi zmdi-chevron-right"></i>Media Centre</a></li>
+	<li id="menu-item-8791" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8791"><a href="https://www.bond.org.uk/2021-g7-leaders-summit-media-resources/"><i class="zmdi zmdi-chevron-right"></i>G7 2021 media resources</a></li>
+</ul>
+</li>
+<li id="menu-item-11631" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-11631"><a><i class="zmdi zmdi-chevron-right"></i>Events</a>
+<ul class="sub-menu">
+	<li id="menu-item-62" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-62"><a href="https://bondngo.force.com/s/events-for-everyone"><i class="zmdi zmdi-chevron-right"></i>All Events</a></li>
+	<li id="menu-item-268" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-268"><a href="https://bondngo.force.com/s/event/acem__Event__c/Default"><i class="zmdi zmdi-chevron-right"></i>Members Events</a></li>
+	<li id="menu-item-11624" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11624"><a href="https://www.bond.org.uk/awards/"><i class="zmdi zmdi-chevron-right"></i>Awards</a></li>
+</ul>
+</li>
+<li id="menu-item-11629" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-11629"><a><i class="zmdi zmdi-chevron-right"></i>Training</a>
+<ul class="sub-menu">
+	<li id="menu-item-63" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-63"><a href="https://bondngo.force.com/s/training"><i class="zmdi zmdi-chevron-right"></i>All Training</a></li>
+	<li id="menu-item-8793" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8793"><a href="https://www.bond.org.uk/training/training-faqs/"><i class="zmdi zmdi-chevron-right"></i>Training FAQs</a></li>
+	<li id="menu-item-8794" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8794"><a href="https://www.bond.org.uk/training/bespoke-training-for-your-organisation/"><i class="zmdi zmdi-chevron-right"></i>Bespoke training</a></li>
+</ul>
+</li>
+<li id="menu-item-11633" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-11633"><a><i class="zmdi zmdi-chevron-right"></i>Jobs</a>
+<ul class="sub-menu">
+	<li id="menu-item-64" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-64"><a href="https://bondngo.force.com/s/jobs"><i class="zmdi zmdi-chevron-right"></i>All Jobs</a></li>
+	<li id="menu-item-8795" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8795"><a href="https://bondngo.force.com/s/post-a-job"><i class="zmdi zmdi-chevron-right"></i>Post a job</a></li>
+	<li id="menu-item-13257" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13257"><a href="https://www.bond.org.uk/jobs/recruiter-faqs/"><i class="zmdi zmdi-chevron-right"></i>Recruiter FAQs</a></li>
+	<li id="menu-item-8796" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8796"><a href="https://bondngo.force.com/s/my-jobs"><i class="zmdi zmdi-chevron-right"></i>My Jobs</a></li>
+	<li id="menu-item-8797" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8797"><a href="https://www.bond.org.uk/jobs/careers-advice/"><i class="zmdi zmdi-chevron-right"></i>Careers advice</a></li>
+</ul>
+</li>
+<li id="menu-item-65" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-65"><a><i class="zmdi zmdi-chevron-right"></i>Resources &#038; Support</a>
+<ul class="sub-menu">
+	<li id="menu-item-8807" class="menu-item menu-item-type-post_type_archive menu-item-object-resource menu-item-8807"><a href="https://www.bond.org.uk/resources/"><i class="zmdi zmdi-chevron-right"></i>All Resources</a></li>
+	<li id="menu-item-8798" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8798"><a href="https://www.bond.org.uk/resources-support/civil-society-and-civic-space/"><i class="zmdi zmdi-chevron-right"></i>Civil society and civic space</a></li>
+	<li id="menu-item-8799" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8799"><a href="https://www.bond.org.uk/resources-support/funding/"><i class="zmdi zmdi-chevron-right"></i>Funding</a></li>
+	<li id="menu-item-13255" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13255"><a href="https://www.bond.org.uk/resources-support/equity-diversity-inclusion/"><i class="zmdi zmdi-chevron-right"></i>Equity, diversity &#038; inclusion</a></li>
+	<li id="menu-item-8802" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8802"><a href="https://www.bond.org.uk/resources-support/safeguarding/"><i class="zmdi zmdi-chevron-right"></i>Safeguarding</a></li>
+	<li id="menu-item-8803" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8803"><a href="https://www.bond.org.uk/resources-support/anti-racism/"><i class="zmdi zmdi-chevron-right"></i>Anti-racism</a></li>
+	<li id="menu-item-8804" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8804"><a href="https://www.bond.org.uk/resources-support/future-dialogues/"><i class="zmdi zmdi-chevron-right"></i>Future Dialogues</a></li>
+	<li id="menu-item-12645" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12645"><a href="https://www.bond.org.uk/charter/charter-revision-and-consultation/"><i class="zmdi zmdi-chevron-right"></i>Charter revision</a></li>
+	<li id="menu-item-8806" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8806"><a href="https://www.bond.org.uk/resources-support/funding/responsible-fundraising-series/"><i class="zmdi zmdi-chevron-right"></i>Responsible fundraising series</a></li>
+	<li id="menu-item-9725" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9725"><a href="https://bondngo.force.com/s/bond-directory"><i class="zmdi zmdi-chevron-right"></i>Bond Directory</a></li>
+</ul>
+</li>
+<li id="menu-item-8809" class="menu-item menu-item-type-post_type_archive menu-item-object-group menu-item-8809"><a href="https://www.bond.org.uk/groups/"><i class="zmdi zmdi-chevron-right"></i>Groups</a></li>
+<li id="menu-item-11634" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-11634"><a><i class="zmdi zmdi-chevron-right"></i>About us</a>
+<ul class="sub-menu">
+	<li id="menu-item-8813" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8813"><a href="https://www.bond.org.uk/about-us/"><i class="zmdi zmdi-chevron-right"></i>Who we are</a></li>
+	<li id="menu-item-8808" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8808"><a href="https://members.bond.org.uk/#/"><i class="zmdi zmdi-chevron-right"></i>Members</a></li>
+	<li id="menu-item-8811" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8811"><a href="https://www.bond.org.uk/staff/"><i class="zmdi zmdi-chevron-right"></i>Staff</a></li>
+	<li id="menu-item-12751" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12751"><a href="https://www.bond.org.uk/about-us/contact-us/"><i class="zmdi zmdi-chevron-right"></i>Contact us</a></li>
+</ul>
+</li>
+<li id="menu-item-67" class="join menu-item menu-item-type-custom menu-item-object-custom menu-item-67"><a href="https://www.bond.org.uk/join/"><i class="zmdi zmdi-chevron-right"></i>Join Bond</a></li>
+</ul>			
+		</nav><!-- #site-navigation -->
+	</div>
+</header><!-- #masthead -->
+
+<script>
+
+	/**
+	 * File navigation.js.
+	 *
+	 * Handles toggling the navigation menu for small screens and enables TAB key
+	 * navigation support for dropdown menus.
+	 */
+
+	( function() {
+		const siteNavigation = document.getElementById( 'site-navigation' );
+
+		// Return early if the navigation don't exist.
+		if ( ! siteNavigation ) {
+			return;
+		}
+
+		const button = siteNavigation.getElementsByTagName( 'button' )[ 0 ];
+
+		// Return early if the button don't exist.
+		if ( 'undefined' === typeof button ) {
+			return;
+		}
+
+		const menu = siteNavigation.getElementsByTagName( 'ul' )[ 0 ];
+
+		// Hide menu toggle button if menu is empty and return early.
+		if ( 'undefined' === typeof menu ) {
+			button.style.display = 'none';
+			return;
+		}
+
+		if ( ! menu.classList.contains( 'nav-menu' ) ) {
+			menu.classList.add( 'nav-menu' );
+		}
+
+		// Toggle the .toggled class and the aria-expanded value each time the button is clicked.
+		button.addEventListener( 'click', function() {
+			siteNavigation.classList.toggle( 'toggled' );
+
+			if ( button.getAttribute( 'aria-expanded' ) === 'true' ) {
+				button.setAttribute( 'aria-expanded', 'false' );
+			} else {
+				button.setAttribute( 'aria-expanded', 'true' );
+			}
+		} );
+
+		// Remove the .toggled class and set aria-expanded to false when the user clicks outside the navigation.
+		document.addEventListener( 'click', function( event ) {
+			const isClickInside = siteNavigation.contains( event.target );
+
+			if ( ! isClickInside ) {
+				siteNavigation.classList.remove( 'toggled' );
+				button.setAttribute( 'aria-expanded', 'false' );
+			}
+		} );
+		
+	}() );
+
+	jQuery(function($){
+
+  /* Show the search form. */
+  $('.js-show-search').click(function() {
+    $('.js-search-form').toggleClass('visible');
+    $('.js-show-search i').toggleClass('zmdi-search')
+    $('.js-show-search i').toggleClass('zmdi-close');
+    $('.js-search-form [type="search"').focus();
+  });
+
+
+  /* Hide search if the container is clicked outside of. */
+  $(document).mouseup(function(e) {
+    var container = $('.site-search');
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+      $('.js-search-form').removeClass('visible');
+      $('.js-show-search i').addClass('zmdi-search');
+      $('.js-show-search i').removeClass('zmdi-close');
+    }
+  });
+
+
+  $('.menu-item-has-children a').click(function(){
+    $(this).next('.sub-menu').toggle();
+    $(this).find('i').toggleClass('zmdi-chevron-right');
+    $(this).find('i').toggleClass('zmdi-chevron-down');
+  });
+
+});
+
+</script>
+    <div id="app" class="container bond-font"></div>
     <!-- built files will be auto injected -->
-    <footer class="pa3 ph4-ns ma0 w-100 bg-bond-dark-grey white cf bond-font l-footer-wrapper mt4">
-        <div class="l-constrained">
-            <div class="panel-pane pane-custom pane-5 footer__logo-wrapper w-100 fl">
-                <h2 class="pane-title dn">Logo</h2>
-                <div class="footer__logo-img w4 pv3">
-                    <a href="https://www.bond.org.uk/" target="_blank"><img
-                        alt="Bond logo"
-                        src="https://www.bond.org.uk/sites/all/themes/custom/omega_bond_main/images/logo-white%403x.png"></a>
-                </div>
-            </div>
-            <div class="l-region l-region--footer-1 w-50-l w-100 fl">
-                <div class="panel-pane pane-custom pane-6 footer__social w-100 w-50-l fl pr4">
-                    <h2 class="pane-title">Contact</h2>
-                    <div class="contact">
-                        <div class="address">
-                            <p class="selectionShareable">Bond, Society Building,</p>
-                            <p class="selectionShareable">8 All Saints Street, </p>
-                            <p class="selectionShareable">London, </p>
-                            <p class="selectionShareable">N1 9RL</p>
-                        </div>
-                        <div class="phone">
-                            <p class="selectionShareable"><a href="tel:020 7837 8344" class="white link bond-link-hover">Tel: +44 (0)20 7837 8344</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-pane pane-custom pane-7 footer__mission w-100 w-50-l fl pr4">
-                    <h2 class="pane-title">Collaborate</h2>
-                    <p class="selectionShareable"><a href="https://www.bond.org.uk/join" target="_blank" class="white link bond-link-hover">Become a member</a></p>
-                    <p class="selectionShareable"><a href="https://www.bond.org.uk/events" target="_blank" class="white link bond-link-hover">Attend an event</a></p>
-                    <p class="selectionShareable"><a href="https://www.bond.org.uk/groups" target="_blank" class="white link bond-link-hover">Join a group</a></p>
-                    <p class="selectionShareable"><a href="https://www.bond.org.uk/ngo-support" target="_blank" class="white link bond-link-hover">Find NGO resources</a>
-                    </p>
-                </div>
-            </div>
-            <div class="l-region l-region--footer-2 w-50-l w-100 fl">
-                <div class="panel-pane pane-block pane-menu-menu-social-media dn">
-                    <h2 class="pane-title">Connect</h2>
-                    <ul class="menu">
-                        <li class="first leaf"><a href="https://twitter.com/bondngo" target="_blank" data-icon="i"
-                                title="Follow us on Twitter" class="bond-social-media-menu__link"
-                                target="_blank">Twitter</a></li>
-                        <li class="leaf"><a href="https://www.linkedin.com/company/bond-uk" target="_blank" data-icon="r"
-                                title="Follow us on LinkedIn" class="bond-social-media-menu__link"
-                                target="_blank">Linked in</a></li>
-                        <li class="leaf"><a href="https://www.facebook.com/bond.org.uk" target="_blank" data-icon="h"
-                                title="Like us and share our news and jobs on Facebook"
-                                class="bond-social-media-menu__link" target="_blank">Facebook</a></li>
-                        <li class="leaf"><a href="https://www.bond.org.uk/rss/pub/rss-news.xml" data-icon="j"
-                                title="Subscribe using RSS" class="bond-social-media-menu__link" target="_blank">RSS</a>
-                        </li>
-                        <li class="last leaf"><a href="https://www.bond.org.uk/subscribe" target="_blank" data-icon="a"
-                                title="Sign up to our newsletters" class="bond-social-media-menu__link">Newsletters</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="panel-pane pane-custom mb4">
-                    <h2 class="pane-title">Data sources</h2>
-                    <p class="selectionShareable">
-                        Member information is provided to Bond by the member organisation,
-                        including the sustainable development goals they work on.
-                        Please <a href="mailto:membership@bond.org.uk" class="white bond-link underline">contact us</a> if information is incorrect.
-                    </p>
-                    <p>
-                        Information on the countries that members work in is based on 
-                        the "area of operation" provided to the <a href="https://register-of-charities.charitycommission.gov.uk/" target="_blank" class="white bond-link underline">Charity Commission for England and Wales</a>.
-                    </p> 
-                    <p>
-                        Some information is only available for charities registered in England and Wales.
-                        Charity information and logos are from <a href="https://charitybase.uk/" target="_blank" class="white bond-link underline">CharityBase</a>.
-                    </p>
-                    <p>
-                        Countries and borders shown on the world map do not imply any expression of opinion on the part of Bond on the legal status of these areas.
-                    </p>
-                </div>
-                <div class="panel-pane pane-custom pane-8 footer__newsletter">
-                    <h2 class="pane-title">Subscribe</h2>
-                    <p class="selectionShareable">Get the latest news, opinions, events, jobs, resources and funding
-                        opportunities straight to your inbox.</p>
-                    <p class="selectionShareable mt4 cf"><a class="button-red-dark white b ph3 pv2 f4 link bg-bond-dark-red"
-                        target="_blank" href="https://www.bond.org.uk/subscribe">Sign up now</a></p>
-                </div>
-            </div>
-            <div class="l-region l-region--footer-3 w-100 fl">
-                <div class="panel-pane pane-custom pane-9 footer__cookies-and-privacy-policy">
-                    <h2 class="pane-title dn">Cookies and privacy</h2>
-                    <div class="links">
-                        <a href="https://www.bond.org.uk/privacy-policy#2._cookies_and_ip_addresses" target="_blank" class="white link bond-link-hover mr2">Cookies</a>
-                        <a href="https://www.bond.org.uk/privacy-policy" target="_blank" target="_blank" class="white link bond-link-hover mr2">Privacy
-                                policy</a></p>
-                    </div>
-                    <div class="company-registration">
-                        <p class="selectionShareable f6 bond-mid-grey">Registered Charity No. 1068839 Company Registration No. 03395681
-                            (England and Wales) ©&nbsp;<%= new Date().getFullYear() %></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    
+<footer id="footer" class="site-footer">
+		<div class="container">
+			<div class="row">
+				<div class="footer-logo">
+					<img src="https://www.bond.org.uk/wp-content/themes/bond/img/logo-white.svg" alt="bond logo">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<h3>Contact</h3>
+					<p>Bond, Society Building,<br />
+8 All Saints Street,<br />
+London,<br />
+N1 9RL
+					
+					<br>Tel: <a href="tel:4402078378344">+44 (0)20 7837 8344</a></p>
+				</div>
+				<div class="col-md-4">
+					<h3>Collaborate</h3>
+					
+					<ul id="footer-menu" class="menu"><li id="menu-item-12742" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12742"><a href="https://www.bond.org.uk/join/become-a-member/">Become a member</a></li>
+<li id="menu-item-12743" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12743"><a href="https://bondngo.force.com/s/events-for-everyone">Attend an event</a></li>
+<li id="menu-item-11521" class="menu-item menu-item-type-post_type_archive menu-item-object-group menu-item-11521"><a href="https://www.bond.org.uk/groups/">Join a group</a></li>
+<li id="menu-item-11520" class="menu-item menu-item-type-post_type_archive menu-item-object-resource menu-item-11520"><a href="https://www.bond.org.uk/resources/">Find NGO resources</a></li>
+</ul>
+				</div>
+				<div class="col-md-5">
+					<div class="connect">
+						<h3>Connect</h3>
+						<div class="social-links">
+							<a href="https://twitter.com/bondngo" target="_blank" rel="noopener">
+								<i class="zmdi zmdi-twitter"></i>
+								<span class="screen-reader-text">Follow us on Twitter</span>
+							</a>
+							<a href="https://www.linkedin.com/company/bond-uk" target="_blank" rel="noopener">
+								<i class="zmdi zmdi-linkedin"></i>
+								<span class="screen-reader-text">Visit us on LinkedIn</span>
+							</a>
+							<a href="https://www.facebook.com/bond.org.uk" target="_blank" rel="noopener">
+								<i class="zmdi zmdi-facebook"></i>
+								<span class="screen-reader-text">Visit us on Facebook</span>
+							</a>
+							<a href="https://www.bond.org.uk/feed/" target="_blank" rel="noopener">
+								<i class="zmdi zmdi-rss"></i>
+								<span class="screen-reader-text">Get our RSS feed</span>
+							</a>
+							<a href="info@bond.org.uk">
+								<i class="zmdi zmdi-email"></i>
+								<span class="screen-reader-text">Subscribe to our mailing list</span>
+							</a>
+						</div>
+					</div>
+					<div class="subscribe">
+						<h3>Subscribe</h3>
+						<p>Get the latest news, opinions, events, jobs, resources and funding opportunities straight to your inbox.</p>
+						<a href="https://www.bond.org.uk/subscribe" class="btn btn-primary" target="_blank" rel="noopener">Sign up now</a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="base-links">
+					
+					<ul id="legal-menu" class="menu"><li id="menu-item-11656" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-11656"><a href="https://www.bond.org.uk/privacy-policy/">Privacy Policy</a></li>
+<li id="menu-item-11522" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11522"><a href="https://www.bond.org.uk/terms-and-conditions/">Website terms and conditions</a></li>
+</ul>
+				</div>
+				<div class="site-info">
+					Registered Charity No. 1068839 Company Registration No. 03395681 (England and Wales) &copy; 2022.
+				</div>	
+			</div><!-- .site-info -->
+		</div>
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
 </body>
 
 </html>

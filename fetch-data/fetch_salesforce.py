@@ -1,5 +1,4 @@
 import base64
-import csv
 import html
 
 import requests
@@ -7,12 +6,10 @@ from settings import (
     SALESFORCE_AUTH_URL,
     SALESFORCE_CLIENT_ID,
     SALESFORCE_CLIENT_SECRET,
-    SALESFORCE_OUTPUT,
     SALESFORCE_PASSWORD,
     SALESFORCE_USERNAME,
 )
 from simple_salesforce import Salesforce, format_soql
-from utils import to_dotted
 
 FIELDS_TO_FETCH = [
     "Id",
@@ -85,27 +82,18 @@ def fetch_data(sf):
     print(f"{data['totalSize']:,.0f} members found")
 
     for row in data["records"]:
-        if row.get("Members_directory_contact_email__c") and not row.get("Hide_email_on_members_directory__c"):
+        if row.get("Members_directory_contact_email__c") and not row.get(
+            "Hide_email_on_members_directory__c"
+        ):
             row["Primary_contact_email__c"] = base64.b64encode(
                 html.escape(row["Members_directory_contact_email__c"]).encode("utf8")
             ).decode("utf8")
-        elif row.get("Primary_contact_email__c") and not row.get("Hide_email_on_members_directory__c"):
+        elif row.get("Primary_contact_email__c") and not row.get(
+            "Hide_email_on_members_directory__c"
+        ):
             row["Primary_contact_email__c"] = base64.b64encode(
                 html.escape(row["Primary_contact_email__c"]).encode("utf8")
             ).decode("utf8")
         else:
             row["Primary_contact_email__c"] = None
         yield row["Id"], row
-
-
-if __name__ == "__main__":
-
-    sf = get_salesforce_instance()
-    records = dict(fetch_data(sf))
-
-    with open(SALESFORCE_OUTPUT, "w", encoding="utf8") as a:
-        fieldnames = [f.split(".")[-1] for f in FIELDS_TO_FETCH]
-        writer = csv.DictWriter(a, fieldnames=fieldnames, lineterminator="\n")
-        writer.writeheader()
-        for row in records.values():
-            writer.writerow({f.split(".")[-1]: row.get(f) for f in FIELDS_TO_FETCH})

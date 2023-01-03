@@ -4,11 +4,8 @@
       <h3 class="pa0 ma0 f2 b">{{ member.name }}</h3>
       <img
         v-if="member.logourl"
-        :style="{
-          backgroundColor: randomColour(),
-        }"
         :src="member.logourl"
-        class="fr org-logo border-bond-dark-red bw0 ba w4"
+        class="fr org-logo border-bond-dark-red bw0 ba w4 bg-bond-dark-red pa2"
       />
     </header>
     <div class="w-100 cf">

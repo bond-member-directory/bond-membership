@@ -19,11 +19,19 @@
     --bond-font: 'DINNextRounded', Arial, Helvetica, sans-serif;
 }
 
+body {
+    font-family: var(--bond-font);
+    font-weight: 400;
+    line-height: 1.5;
+}
 .bond-font {
     font-family: var(--bond-font);
 }
 .bg-bond-red {
     background-color: var(--bond-red);
+}
+.bg-bond-medium-red {
+    background-color: var(--bond-medium-red);
 }
 .bg-bond-dark-red {
     background-color: var(--bond-dark-red);
@@ -43,6 +51,9 @@
 .border-bond-red {
     border-color: var(--bond-red);
 }
+.border-bond-medium-red {
+    border-color: var(--bond-medium-red);
+}
 .border-bond-dark-red {
     border-color: var(--bond-dark-red);
 }
@@ -57,6 +68,9 @@
 }
 .fill-bond-red {
     fill: var(--bond-red);
+}
+.fill-bond-medium-red {
+    fill: var(--bond-medium-red);
 }
 .fill-bond-white {
     fill: var(--bond-white);
@@ -76,6 +90,9 @@
 .stroke-bond-red {
     stroke: var(--bond-red);
 }
+.stroke-bond-medium-red {
+    stroke: var(--bond-medium-red);
+}
 .stroke-bond-white {
     stroke: var(--bond-white);
 }
@@ -93,6 +110,9 @@
 }
 .bond-red {
     color: var(--bond-red);
+}
+.bond-medium-red {
+    color: var(--bond-medium-red);
 }
 .bond-dark-red {
     color: var(--bond-dark-red);
@@ -117,8 +137,13 @@
 .multiselect.bg-bond-grey div.multiselect-search > input {
     background-color: var(--bond-grey);
 }
-.multiselect-tag {
-    font-size: 2em;
+#multiselect .multiselect-tag {
+    font-size: 1.1rem;
+    background-color: var(--bond-darkest-red); 
+    color: var(--bond-white);
+}
+#multiselect .multiselect-tag > i::before {
+    color: var(--bond-white);
 }
 
 /* grids */
@@ -174,23 +199,44 @@ strong, h1, h2, h3, h4, .b {
     width: 1px;
 }
 
-/* Footer styles */
-.l-footer-wrapper .pane-title {
-    border-color: #989482;
-    padding: 0 0 5px 0;
-    text-transform: initial;
-    border-bottom: 0.13em dotted;
-    font-size: 17px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.35;
-    letter-spacing: normal;
-    color: #fff;
-    text-align: left !important;
-}
-
 /* Amendments for accessibility */
 .grow:focus-within {
   transform: scale(1.05);
+}
+
+/* Header and footer */
+header, footer {
+    font-weight: bold;
+}
+header .btn, 
+footer .btn {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+header h1, header h2, header h3, header h4, header h5, header h6,
+footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
+    margin: 0;
+}
+
+nav#site-navigation .menu > li a {
+    cursor: pointer;
+}
+
+.menu-toggle {  
+    box-shadow: none;
+    border: 1px solid;
+    border-color: #560014;
+    border-radius: 3px;
+    color: #FFFFFF;
+    line-height: 1.3;
+    padding: 10px 20px;
+    transition: 0.3s border-color;
+    transition: 0.3s background-color;
+    cursor: pointer;
 }
