@@ -2,19 +2,21 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import 'tachyons/css/tachyons.min.css'
 import router from './router'
-import VueGtag from "vue-gtag-next";
+import { createGtm } from '@gtm-support/vue-gtm';
 
 const app = createApp(App);
 
 app.use(router);
 
+
 const GA_ID = process.env.VUE_APP_GOOGLE_ANALYTICS_ID;
 if (GA_ID) {
-    app.use(VueGtag, {
-        property: {
+    app.use(
+        createGtm({
             id: GA_ID,
-        }
-    });
+            vueRouter: router,
+        }),
+    );
 }
 
 app.mount('#app')
