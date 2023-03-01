@@ -9,7 +9,7 @@ const app = createApp(App);
 app.use(router);
 
 
-const GA_ID = process.env.VUE_APP_GOOGLE_ANALYTICS_ID;
+const GA_ID = process.env.VUE_APP_GTM_ID;
 if (GA_ID) {
     app.use(
         createGtm({
