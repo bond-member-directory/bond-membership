@@ -14,9 +14,8 @@
     "d3": "^6.7.0",
     "tachyons": "^4.12.0",
     "vue": "^3.0.0",
-    "vue-gtag-next": "^1.14.0",
     "vue-router": "^4.1.6",
-    "webpack": "^4.46.0"
+    "webpack": "^4.47.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
