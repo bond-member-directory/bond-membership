@@ -37,8 +37,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  console.log(to)
   if (to.name == "Home" && Object.values(to.query).filter((x) => x.length).length > 0) {
     document.title = "Search | " + DEFAULT_TITLE;
+  } else if (to.name == "Member") {
+    document.title = to.params.id + " | Member | " + DEFAULT_TITLE;
   } else {
     document.title = to.meta.title || DEFAULT_TITLE;
   }
