@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { memberIsSelected, getFiltersFromUrl } from "../FilterStore.js";
+import { memberIsSelected, getFiltersFromUrl, debounce } from "../FilterStore.js";
 import MemberCard from "./MemberCard.vue";
 import SeparatedList from "./SeparatedList.vue";
 
@@ -79,6 +79,15 @@ export default {
     $route: function(to){
       this.filters = getFiltersFromUrl(to);
     },
+    filters: debounce(function(to){
+      this.$gtm.trackEvent({
+        event: 'interaction',
+        category: 'Members',
+        action: 'change',
+        label: 'Filter members',
+        value: JSON.stringify(to),
+      });
+    }, 500),
   },
   computed: {
     filteredMembers: function () {

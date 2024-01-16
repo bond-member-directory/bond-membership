@@ -1,22 +1,26 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { trackRouter } from "vue-gtag-next";
 import Home from '../views/Home.vue';
+
+const DEFAULT_TITLE = "Bond | The international development network";
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { title: DEFAULT_TITLE },
   },
   {
     path: '/member/:id',
     name: 'Member',
-    component: () => import('../views/Member.vue')
+    meta: { title: "Member | " + DEFAULT_TITLE },
+    component: () => import('../views/Member.vue'),
   },
   {
     path: '/about',
     name: 'About',
-    component: () => import('../views/About.vue')
+    meta: { title: "About | " + DEFAULT_TITLE },
+    component: () => import('../views/About.vue'),
   }
 ]
 
@@ -32,6 +36,13 @@ const router = createRouter({
   },
 });
 
-trackRouter(router);
+router.beforeEach((to, from, next) => {
+  if (to.name == "Home" && Object.values(to.query).filter((x) => x.length).length > 0) {
+    document.title = "Search | " + DEFAULT_TITLE;
+  } else {
+    document.title = to.meta.title || DEFAULT_TITLE;
+  }
+  next();
+});
 
 export default router
