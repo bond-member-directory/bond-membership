@@ -1,3 +1,5 @@
+import members from "./assets/bond_members.json";
+
 export function getFiltersFromUrl(route) {
   var filters = {
     country: [],
@@ -63,4 +65,8 @@ export function debounce(fn, wait) {
       fn.apply(context, args); // call the function if time expires
     }, wait);
   }
+}
+
+export function getMember(memberId) {
+  return Object.values(members.members).find((m) => slugify(m.name) == memberId)
 }
