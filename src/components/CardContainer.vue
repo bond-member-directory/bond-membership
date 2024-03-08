@@ -124,6 +124,10 @@ export default {
         action: "change",
         label: "Filter members",
         value: readableFilters(to),
+        search: to.search,
+        country: to.country.join(","),
+        sdg: to.sdg.join(","),
+        member_count: this.filteredMembers.length,
       });
     }, 500),
   },
