@@ -129,7 +129,7 @@ export default {
         sdg: to.sdg.join(","),
         member_count: this.filteredMembers.length,
       });
-    }, 500),
+    }, 1200),
   },
   computed: {
     filteredMembers: function () {

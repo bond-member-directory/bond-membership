@@ -14,7 +14,8 @@
           />
         </div>
         <div class="">
-          <input :value="filters.search"
+          <input
+            :value="filters.search"
             type="search"
             @keyup.prevent="setSearch"
             placeholder="Search organisations"
@@ -36,30 +37,69 @@
       </div>
       <div class="w-100 mv3">
         <div class="mb2">
-          <h3 class="ma0 pa0 f5 normal">Filter by Sustainable Development Goals (<abbr title="Sustainable Development Goals">SDGs</abbr>)</h3>
+          <h3 class="ma0 pa0 f5 normal">
+            Filter by Sustainable Development Goals (<abbr
+              title="Sustainable Development Goals"
+              >SDGs</abbr
+            >)
+          </h3>
         </div>
         <div class="ma0 pa0 smol-css-grid sdg-grid" role="radiogroup">
-          <label v-for="(sdg, index) in sdgSelectValues" :key="index" class="di o-100-hover grow pointer" @mouseover="hoverSDG = sdg.label" @mouseleave="hoverSDG = null">
-            <input v-if="filters.sdg && sdgSelected(sdg.value) && filters.sdg.length > 0" @click.prevent="clearSDG" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
-            <input v-else @click.prevent="setSDG(sdg.value)" type="checkbox" :checked="sdgSelected(sdg.value)" class="sr-only" />
+          <label
+            v-for="(sdg, index) in sdgSelectValues"
+            :key="index"
+            class="di o-100-hover grow pointer"
+            @mouseover="hoverSDG = sdg.label"
+            @mouseleave="hoverSDG = null"
+          >
+            <input
+              v-if="
+                filters.sdg && sdgSelected(sdg.value) && filters.sdg.length > 0
+              "
+              @click.prevent="clearSDG"
+              type="checkbox"
+              :checked="sdgSelected(sdg.value)"
+              class="sr-only"
+            />
+            <input
+              v-else
+              @click.prevent="setSDG(sdg.value)"
+              type="checkbox"
+              :checked="sdgSelected(sdg.value)"
+              class="sr-only"
+            />
             <span class="sr-only">{{ sdg.label }}</span>
-            <img :src="sdgIcon(sdg.value)" :title="sdg.label" tabindex="0" class=""
+            <img
+              :src="sdgIcon(sdg.value)"
+              :title="sdg.label"
+              tabindex="0"
+              class=""
               role="radio"
               :aria-checked="sdgSelected(sdg.value)"
               :class="{
-              'o-100': sdgSelected(sdg.value),
-              'o-30': !sdgSelected(sdg.value),
-            }" />
+                'o-100': sdgSelected(sdg.value),
+                'o-30': !sdgSelected(sdg.value),
+              }"
+            />
           </label>
         </div>
-        <p class="ma0 pa0" style="min-height: 2rem;">
+        <p class="ma0 pa0" style="min-height: 2rem">
           <span class="" v-if="hoverSDG">{{ hoverSDG }}</span>
           <span v-else><separated-list :items="selectedSDGs" /></span>
         </p>
       </div>
       <div class="mv3 w-100 tr">
-        <a href="#" class="bond-red link underline bond-link b f5 ml3" @click.prevent="clearFilters">Clear filters</a>
-        <a href="#" class="bond-red link underline bond-link b f5 ml3" @click.prevent="showMap = !showMap">
+        <a
+          href="#"
+          class="bond-red link underline bond-link b f5 ml3"
+          @click.prevent="clearFilters"
+          >Clear filters</a
+        >
+        <a
+          href="#"
+          class="bond-red link underline bond-link b f5 ml3"
+          @click.prevent="showMap = !showMap"
+        >
           <template v-if="showMap">Hide map</template>
           <template v-else>Show map</template>
         </a>
@@ -75,7 +115,7 @@
 import Multiselect from "@vueform/multiselect";
 import MapContainer from "./MapContainer.vue";
 import SeparatedList from "./SeparatedList.vue";
-import { getFiltersFromUrl } from "../FilterStore.js";
+import { getFiltersFromUrl, debounce } from "../FilterStore.js";
 
 export default {
   name: "DataFilters",
@@ -102,57 +142,74 @@ export default {
       sdgs.sort((a, b) => a.value.localeCompare(b.value));
       return sdgs;
     },
-    selectedSDGs: function(){
+    selectedSDGs: function () {
       var component = this;
-      var selected = this.sdgSelectValues.filter(function(sdg) {
-        return component.sdgSelected(sdg.value);
-      }).map((sdg) => sdg.label);
-      if(selected.length == this.sdgSelectValues.length){
+      var selected = this.sdgSelectValues
+        .filter(function (sdg) {
+          return component.sdgSelected(sdg.value);
+        })
+        .map((sdg) => sdg.label);
+      if (selected.length == this.sdgSelectValues.length) {
         return [];
       }
       return selected;
     },
   },
   watch: {
-    $route: function(to){
+    $route: function (to) {
       this.filters = getFiltersFromUrl(to);
     },
   },
   methods: {
-    setCountry: function(value){
-      if(Array.isArray(value)){
+    setCountry: function (value) {
+      if (Array.isArray(value)) {
         value = value.join(",");
       }
-      this.$router.push({path: this.$route.path, query: {...this.$route.query, country: value}});
+      this.$router.push({
+        path: this.$route.path,
+        query: { ...this.$route.query, country: value },
+      });
     },
-    setSDG: function(value){
-      if(Array.isArray(value)){
+    setSDG: function (value) {
+      if (Array.isArray(value)) {
         value = value.join(",");
       }
-      this.$router.push({path: this.$route.path, query: {...this.$route.query, sdg: value}});
+      this.$router.push({
+        path: this.$route.path,
+        query: { ...this.$route.query, sdg: value },
+      });
     },
-    clearCountry: function(){
-      this.$router.push({path: this.$route.path, query: {...this.$route.query, country: ""}});
+    clearCountry: function () {
+      this.$router.push({
+        path: this.$route.path,
+        query: { ...this.$route.query, country: "" },
+      });
     },
-    clearSDG: function(){
-      this.$router.push({path: this.$route.path, query: {...this.$route.query, sdg: ""}});
+    clearSDG: function () {
+      this.$router.push({
+        path: this.$route.path,
+        query: { ...this.$route.query, sdg: "" },
+      });
     },
-    clearFilters: function(){
-      this.$router.push({path: this.$route.path, query: {}});
+    clearFilters: function () {
+      this.$router.push({ path: this.$route.path, query: {} });
     },
-    setSearch: function(event){
-      this.$router.push({path: this.$route.path, query: {...this.$route.query, search: event.target.value}});
-    },
-    sdgIcon: function(sdg){
+    setSearch: debounce(function (event) {
+      this.$router.push({
+        path: this.$route.path,
+        query: { ...this.$route.query, search: event.target.value },
+      });
+    }, 200),
+    sdgIcon: function (sdg) {
       return require("../assets/images/sdgs/E-WEB-Goal-" + sdg + ".png");
     },
-    sdgSelected: function(sdg){
-      if(!this.$route.query.sdg || this.$route.query.sdg.length==0){
+    sdgSelected: function (sdg) {
+      if (!this.$route.query.sdg || this.$route.query.sdg.length == 0) {
         return true;
       }
       return this.$route.query.sdg.includes(sdg);
-    }
-  }, 
+    },
+  },
   data() {
     return {
       filters: getFiltersFromUrl(this.$route),
@@ -166,7 +223,7 @@ export default {
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style scoped>
 .multiselect-tag {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 .sdg-grid {
