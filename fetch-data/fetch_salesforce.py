@@ -6,8 +6,6 @@ from settings import (
     SALESFORCE_AUTH_URL,
     SALESFORCE_CLIENT_ID,
     SALESFORCE_CLIENT_SECRET,
-    SALESFORCE_PASSWORD,
-    SALESFORCE_USERNAME,
 )
 from simple_salesforce import Salesforce, format_soql
 
@@ -55,16 +53,20 @@ WHERE Membership_status__c IN {{membership_status}}
 
 
 def get_salesforce_instance():
-    response = requests.post(
+    r = requests.post(
         SALESFORCE_AUTH_URL,
         data={
-            "client_secret": SALESFORCE_CLIENT_SECRET,
+            "grant_type": "client_credentials",
             "client_id": SALESFORCE_CLIENT_ID,
-            "grant_type": "password",
-            "username": SALESFORCE_USERNAME,
-            "password": SALESFORCE_PASSWORD,
+            "client_secret": SALESFORCE_CLIENT_SECRET,
         },
-    ).json()
+    )
+    try:
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        print(f"Error: {r.text}")
+        raise e
+    response = r.json()
     return Salesforce(
         instance_url=response["instance_url"],
         session_id=response["access_token"],
