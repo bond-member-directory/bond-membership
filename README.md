@@ -43,7 +43,7 @@ Include environmental variables:
 ```
 SALESFORCE_CLIENT_ID=<api_id>
 SALESFORCE_CLIENT_SECRET=<api_secret>
-SALESFORCE_URL=<salesforce_url>
+SALESFORCE_AUTH_URL=<salesforce_url>/services/oauth2/token
 
 CHARITYBASE_API_KEY=<apikey>
 ```

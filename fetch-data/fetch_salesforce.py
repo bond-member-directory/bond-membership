@@ -4,8 +4,11 @@ import html
 import requests
 from settings import (
     SALESFORCE_AUTH_URL,
+    SALESFORCE_AUTHENTICATION_METHOD,
     SALESFORCE_CLIENT_ID,
     SALESFORCE_CLIENT_SECRET,
+    SALESFORCE_PASSWORD,
+    SALESFORCE_USERNAME,
 )
 from simple_salesforce import Salesforce, format_soql
 
@@ -53,13 +56,23 @@ WHERE Membership_status__c IN {{membership_status}}
 
 
 def get_salesforce_instance():
-    r = requests.post(
-        SALESFORCE_AUTH_URL,
-        data={
-            "grant_type": "client_credentials",
+    payload = {
+        "grant_type": "client_credentials",
+        "client_id": SALESFORCE_CLIENT_ID,
+        "client_secret": SALESFORCE_CLIENT_SECRET,
+    }
+    if SALESFORCE_AUTHENTICATION_METHOD == "password":
+        payload = {
+            "grant_type": "password",
             "client_id": SALESFORCE_CLIENT_ID,
             "client_secret": SALESFORCE_CLIENT_SECRET,
-        },
+            "username": SALESFORCE_USERNAME,
+            "password": SALESFORCE_PASSWORD,
+        }
+
+    r = requests.post(
+        SALESFORCE_AUTH_URL,
+        data=payload,
     )
     try:
         r.raise_for_status()
