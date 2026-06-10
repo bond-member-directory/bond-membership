@@ -20,7 +20,6 @@ SDG_NAMES = {
 
 
 def clean_sdgs(members):
-
     sdg_fields = {
         k.replace(" ", "_").replace(",", "") + "__c": v for k, v in SDG_NAMES.items()
     }
